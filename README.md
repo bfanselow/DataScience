@@ -1,4 +1,4 @@
-# DataScience
+# Data Science
 
 ### Collecting and "cleaning" gigantic quantities of (structured or unstructured) data to be processed by mathematical/statistical-analysis and machine-learning algorithms with the goal of extracting meaningful knowledge and insights (patterns, trends, predictions, etc.).
 
