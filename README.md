@@ -10,6 +10,7 @@ Venn Diagram Source: [Drew Conway](http://drewconway.com/zia/2013/3/26/the-data-
 ### SciPy
  * NumPy 
  * Pandas   
+
 **NumPy** and **Pandas** both provide fast and intuitive mathematical computation on arrays/vectors and matrices.
 
 A **"vector"** is a list of one or more ordinary numbers. It can be thought of as a coordinate in an N-dimesional space. Mathematically this (Euclidean vector) represents line from the "origin" of that space to that coordinate where the origin is the zero-point of all dimensions.
