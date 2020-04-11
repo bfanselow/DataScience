@@ -106,17 +106,20 @@ Question:
 In the above case, we had two A-conditions: "A" and "not-A".  Suppose we have 3 or more conditions for A (A1, A2, A3, ...):
 
 Bayes Theorem becomes:
-   P(A1|B) = P(A1)P(B|A1) /( P(A1)P(B|A1) + P(A2)P(B|A2) + P(A3)P(B|A3) + ...) 
+```
+  P(A1|B) = P(A1)P(B|A1) /( P(A1)P(B|A1) + P(A2)P(B|A2) + P(A3)P(B|A3) + ...) 
+```
 
-Example:
- Consider an art competition which is composed 3 artists: Anne, Alice, and Art
+As an example consider an art competition which is composed 3 artists (Anne, Alice, and Art):
   * Anne submits 15 paintings - P(Anne) = 15/30 
     4% of Anne's works have won First Prize in previous competitions. In other words, the probability that a painting wins First-place given that the painting is by Anne is 4%
   * Alice submits 5 paintings. 6% of her works have won First Prize in previous competitions.
   * Art submits 10 paintings. 3% of his works have won First Prize in previous competitions.
 
 What is the chance that Anne will win First Prize? Note that there are 30 total paintings.
+```
  P(Anne|First) =  P(Anne)P(First|Anne) / P(Anne)P(First|Anne) + P(Alice)P(First|Alice) + P(Art)P(First|Art)
+```
 
 We are asking:
  What is probability that the painting is Anne's given that the prize is first-place.
@@ -125,7 +128,9 @@ Bayes Equation:
  * Numerator: (prob painting is Anne's)*(prob that the prize is first-place given that painting is Anne's)
  * Denominator: (same-as-numerator  + equivelent-for-Alice + equiv-for-Art) 
 
+```
  P(Anne|First) = (15/30)*4% / (15/30)*4% + (5/30)*6% + (10/30)*3%  = 15*4% / (15*4% + 5*6% + 10*3%) = 0.6/0.6+0.3+0.3 = 50%
+```
 
 One ciritcal assumption which allowed us to make these additive calculations in the denominator is that those conditions all have totally independent probabilites. Oftentimes, this is true. But it is not always the case. When we do make these (sometimes naive) assumptions, Bayes Theorem is referred to as a **Naive Bayes Classification**
 

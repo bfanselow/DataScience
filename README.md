@@ -9,12 +9,32 @@ Venn Diagram Source: [Drew Conway](http://drewconway.com/zia/2013/3/26/the-data-
 ---
 
 ## Machine Learning Projects
-Each Machine-Learning project in the **ML_PROJECTS** folder has its own *README* file with discussion on the relevant ML topics for that project (background, algorithms, etc.). 
  * **SHAM (Spam/Ham Analysis Engine)**: Simple Text-Classification using Naive-Bayes and SVM models to detect Spam.
  * **FakeNewsDetection**: Simplistic fake-news detector using PassiveAggressiveClassifier linear-regression model. 
 
+Below is a dicussion of the basic Machine-Learning concpets, ML-Mathematics and the (Python) tools common to all of those projects. 
+Each Machine-Learning project in the **ML_PROJECTS** folder has its own *README* file with a more in-depth discussion on the ML topics relevent to that project (background, algorithms, etc.). 
+
 ---
-Below is a dicussion of ML Mathematics and the (Python) tools common to all of those projects. 
+## Basic Data-Science Steps (though not always this linear - typcially more cycle/iterative in practice)
+ 1) Frame the problem: understaning business need. 
+ 2) Import Raw Data needed
+ 3) Format conversion/normalization: get all data into standard format for a single process to handle all remaining steps
+ 4 Rough Data Cleaning 
+   - Handling Missing values
+   - Handling Corrupted values
+ 5) Understand/explore the data
+   - Pattern Detection
+   - Distribution analysis 
+   - Outlier Detection
+ 6) Fine Cleaning and Feature Engineering (perparing data for Machine-Learning algorithms)
+    - Scaling and normalization: adjusting the range and center of data to ease learning and improve the interpretation of our results. 
+    - Filling missing values: Real-world datasets often have missing values.
+    - Feature selection: removing features because they are unimportant, redundant, or outright counterproductive to learning.
+    - Feature coding: choosing a set of symbolic values to represent different categories.
+    - Feature extraction: moving from low-level features that are unsuitable for learning (we get poor testing results) to higher-level features which are useful for learning.
+ 7) Predictive (ML) modelling: train and validate models.
+ 8) Interpreting results: visualiizing outcomes
 
 ---
 ## Machine Learning Mathematics 
