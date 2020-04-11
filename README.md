@@ -34,8 +34,8 @@ arning algorithms perform mathematical computations on vectors and collections-o
 ---
 ## (Python) Machine Learning Tools 
 
-The following Python modules are used by above ML projects. 
- ## SciPy family
+The following Python modules are used by the above ML projects:
+ ## Modules from SciPy family
  * NumPy 
  * Pandas   
  * Matplotlib
