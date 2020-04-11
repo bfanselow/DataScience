@@ -7,6 +7,16 @@
 Venn Diagram Source: [Drew Conway](http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram)
 
 ---
+
+## Machine Learning Projects
+Each Machine-Learning project in the **ML_PROJECTS** folder has its own README file with discussion of the relevant ML topics (background, algorithms, etc.) for that project. 
+ * **SHAM (Spam/Ham Analysis Engine)**: Simple Text-Classification using Naive-Bayes and SVM models to detect Spam.
+ * **FakeNewsDetection**: Simplistic fake-news detector using PassiveAggressiveClassifier linear-regression model. 
+
+---
+Below is a dicussion of ML Mathematics and the (Python) tools common to all of those projects. 
+
+---
 ## Machine Learning Mathematics 
 A **"vector"** is a list of one or more ordinary numbers. It can be thought of as a coordinate in an N-dimesional space. Mathematically this (Euclidean vector) represents line from the "origin" of that space to that coordinate where the origin is the zero-point of all dimensions.
 
@@ -27,6 +37,7 @@ arning algorithms perform mathematical computations on vectors and collections-o
  * NumPy 
  * Pandas   
  * Matplotlib
+ * Sklearn 
 
 **NumPy** and **Pandas** both provide fast and intuitive mathematical computation on arrays/vectors and matrices. While they seem somewhat similar, each module has unique functionalities and strengths. 
 
