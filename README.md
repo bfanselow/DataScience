@@ -16,7 +16,8 @@ Below is a dicussion of the basic Machine-Learning concpets, ML-Mathematics and 
 Each Machine-Learning project in the **ML_PROJECTS** folder has its own *README* file with a more in-depth discussion on the ML topics relevent to that project (background, algorithms, etc.). 
 
 ---
-## Basic Data-Science Steps (though not always this linear - typcially more cycle/iterative in practice)
+## Basic Data-Science Steps 
+### (though not always this linear - typcially more cycle/iterative in practice)
  1) Frame the problem: understaning business need. 
  2) Import Raw Data needed
  3) Format conversion/normalization: get all data into standard format for a single process to handle all remaining steps
