@@ -32,12 +32,15 @@ arning algorithms perform mathematical computations on vectors and collections-o
  * **Tensor**: A multi dimensional matrix with rank n.
 
 ---
-## Machine Learning Tools (Python)
-### SciPy
+## (Python) Machine Learning Tools 
+
+The following Python modules are used by above ML projects. 
+ ## SciPy family
  * NumPy 
  * Pandas   
  * Matplotlib
- * Sklearn 
+ ## Built on top of SciPy
+   * Sklearn 
 
 **NumPy** and **Pandas** both provide fast and intuitive mathematical computation on arrays/vectors and matrices. While they seem somewhat similar, each module has unique functionalities and strengths. 
 
