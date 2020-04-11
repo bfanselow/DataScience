@@ -17,23 +17,23 @@ Each Machine-Learning project in the **ML_PROJECTS** folder has its own *README*
 
 ---
 ## Basic Data-Science Steps 
-### (though not always this linear - typcially more cycle/iterative in practice)
+###  Not exactly this linear in practice - typcially more cycle/iterative
  1) Frame the problem: understaning business need. 
  2) Import Raw Data needed
  3) Format conversion/normalization: get all data into standard format for a single process to handle all remaining steps
- 4 Rough Data Cleaning 
-   - Handling Missing values
-   - Handling Corrupted values
+ 4) Rough Data Cleaning 
+     * Handling Missing values
+     * Handling Corrupted values
  5) Understand/explore the data
-   - Pattern Detection
-   - Distribution analysis 
-   - Outlier Detection
+     * Pattern Detection
+     * Distribution analysis 
+     * Outlier Detection
  6) Fine Cleaning and Feature Engineering (perparing data for Machine-Learning algorithms)
-    - Scaling and normalization: adjusting the range and center of data to ease learning and improve the interpretation of our results. 
-    - Filling missing values: Real-world datasets often have missing values.
-    - Feature selection: removing features because they are unimportant, redundant, or outright counterproductive to learning.
-    - Feature coding: choosing a set of symbolic values to represent different categories.
-    - Feature extraction: moving from low-level features that are unsuitable for learning (we get poor testing results) to higher-level features which are useful for learning.
+      * Scaling and normalization: adjusting the range and center of data to ease learning and improve the interpretation of our results. 
+      * Filling missing values: Real-world datasets often have missing values.
+      * Feature selection: removing features because they are unimportant, redundant, or outright counterproductive to learning.
+      * Feature coding: choosing a set of symbolic values to represent different categories.
+      * Feature extraction: moving from low-level features that are unsuitable for learning (we get poor testing results) to higher-level features which are useful for learning.
  7) Predictive (ML) modelling: train and validate models.
  8) Interpreting results: visualiizing outcomes
 
