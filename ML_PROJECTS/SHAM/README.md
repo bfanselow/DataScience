@@ -30,9 +30,7 @@ Our Spam/Ham Analysis Machine will use two (Supervised-ML) **Text Classification
 
 ---
 ### Text/Document Classification
-Given some text input, automatically classifying it into predefined catagories (i.e. assign some label to it).
-Multiple uses: spam-filtering, sentiment analysis, genre-classification or comprehension level of a book, or fake-news detection.
-
+Given some text input, automatically classifying it into predefined catagories (i.e. assign some label to it). This has many important practical uses such as: spam-filtering, sentiment-analysis, fake-news-detection, or genre-classification or comprehension level of a book.
 
 ---
 
@@ -134,40 +132,41 @@ One ciritcal assumption which allowed us to make these additive calculations in 
 ---
 
 Applying Naive Bayes Classification (NBC) to Spam detection, we have two conditions - spam or NOT-spam (HAM).
-
+```
 P(S|w) = P(w|S)*P(S) / P(w)
-
+```
  where:
   * P(S|w):  Probability that a messages is spam, knowing that we have some word "w" in it
   * P(w|S):  Probability of finding that word "w" is in a spam message
   * P(S):    Probability that a message is spam 
   * P(w):    Probability that word "w" is in any message 
  
-Which is equivelnt to the following (if conditions are independent, which they are in this case)
-
+Which is equivelent to the following (if conditions are independent, which they are in this case)
+```
 P(S|w) = P(w|S)*P(S) / P(w|S)*P(S) + P(w|!S)*P(!S) =  P(w|S)*P(S) / P(w|S)*P(S) + P(w|H)*P(H) 
-
- where:
+```
+where:
   * P(!S) = P(H):   Probability that a message is NOT spam (is HAM)
   * P(w|!S) = P(w|H): Probability of finding that word "w" is in a NON-spam message
 
  
 In spam filtering/detection we make the assumption that one class of messages (i.e. spam messages in this case) tend to have have a different word distribution than messages in the other class (i.e. non-spam messages). For example, one might imagine the word "free" is more common in spam messages than non-spam. 
-We can learn what this distribution is from messages that were identified as spam and messages that were identified as not being spam (sometimes called ham). The objective of the learning ability is to reduce the number of false positives. As annoying it might be to receive a spam message, it is worse to not receive a message from a customer just because he used a word that triggered the filter. 
 
 If we represnt every email as a "vector" having the set (x1,x2,x3,,,xN) distinct words, we can calculate the probablity of spam with:
-
+```
 P(S|x1,x2...xN) = P(x1,x2,...N|S)*P(S) / P(x1,x2,...xN|S)*P(S) + P(x1,x2...xN|H)*P(H) 
+```
 
 We will assume that the probability of the word x1 (say "viagra") is independent of the probability of the word x2 (say "pills") (which is a rasonable assumption if we already factor in whether the email is spam or not.
 
 This allow us to simplify to an approximate solution, taking the product of each word-prob expression:
-
+```
 P(S|x1,x2...xN) = PROD{P(x_i)*P(S)} /  PROD{P(x_i)*P(S)} +  PROD{P(x_i)*P(H)} 
-
+```
  OR
- 
+```
 P(S|x1,x2...xN) = P(x1)*P(S) * P(x2)*P(S) * ... P(xN|S)*P(S) / ( P(x1)*P(S) * P(x2)*P(S) * ... P(xN|S)*P(S) ) + ( P(x1)*P(H) * P(x2)*P(H) * ... P(xN|H) )
+```
 
 A downside of Bayesian filtering in cases of more targeted spam is that spammers will start using words or whole pieces of text that will lower the score. During prolonged use, these words might get associated with spam, which is called poisoning. 
 
@@ -186,3 +185,7 @@ Another pitfall is that a spammer could slip a word into spam that was only ever
 ## Support Vector Machine
 
  An SVM model is a representation of the examples as points in space, mapped so that the examples of the separate categories are divided by a clear gap that is as wide as possible. New examples are then mapped into that same space and predicted to belong to a category based on the side of the gap on which they fall.
+
+We can learn what this distribution is from messages that were identified as spam and messages that were identified as not being spam (sometimes called ham). 
+
+The objective of the learning ability is to reduce the number of false positives. As annoying as it is to receive a spam message, it is worse to not receive an important message because a word was used that triggered the filter. 
