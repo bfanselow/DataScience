@@ -9,7 +9,7 @@ Venn Diagram Source: [Drew Conway](http://drewconway.com/zia/2013/3/26/the-data-
 ---
 
 ## Machine Learning Projects
-Each Machine-Learning project in the **ML_PROJECTS** folder has its own README file with discussion of the relevant ML topics (background, algorithms, etc.) for that project. 
+Each Machine-Learning project in the **ML_PROJECTS** folder has its own *README* file with discussion on the relevant ML topics for that project (background, algorithms, etc.). 
  * **SHAM (Spam/Ham Analysis Engine)**: Simple Text-Classification using Naive-Bayes and SVM models to detect Spam.
  * **FakeNewsDetection**: Simplistic fake-news detector using PassiveAggressiveClassifier linear-regression model. 
 
@@ -46,4 +46,5 @@ The **NumPy** module is mainly used for working with numerical data using (Numpy
 The **Pandas** module is mainly used for working with tabular data. It allows us to work with data in table form, such as in CSV or SQL database formats. We can also create tables of our own, and edit or add columns or rows to tables. Pandas provides **DataFrames** and **Series** objects which are very useful for working with and analyzing tablular data.
 
 The **Matplotlib** module is used for data visualization (drawing charts and graphs) which is extremely useful for better understanding of the data.
- 
+
+**Sklearn** is a Machine Learning library providing various *classification*, *regression* and *clustering* algorithms including Naive-Bayes, Support-Vector-Machines, Random-Forests, Gradient-Boosting, k-means and DBSCAN and is desinged to interoperate with the above numerical libs.
