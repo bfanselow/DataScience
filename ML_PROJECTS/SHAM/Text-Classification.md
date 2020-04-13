@@ -4,8 +4,9 @@ Given some text input, automatically classify it into predefined catagories (i.e
 
 ## Background
 Machine Learning models are categorized as **Supervised** or **Unsupervised**.  The majority of practical machine learning uses supervised learning, in which you know a set of input data (x1,x2,...x3) and the output variable (Y) and use the algorithm to learn the mapping function from the input to the output:
-
+```
 Y = f(x1,x2...xN)
+```
 
 The goal is to approximate the mapping function so well that when you have new input data (x) that you can predict the output variables (Y) for that data.
 
@@ -24,12 +25,10 @@ Unsupervised learning problems can be further grouped into **clustering** and **
 The problem with interpreting the human language is that it is not a set of rules or binary data that can be fed into a system.
 However, with the help of Natural Language Processing (NLP) and different Machine-Learning "models" (classification-algorithms) like Naive Bayes (NB), Support-Vector-Machine (SVM), Boosting-Models and Neural Networks we can implement a set of computational rules.
 
+---
 Our Spam/Ham Analysis Machine will use two (Supervised-ML) **Text Classification** models, classifying "spam" and "not-spam" (a.k.a. "ham").
  * **Naive Bayes**
  * **Support-Vector-Machine**
-
-
----
 
 ## Naive Bayes Model
 
