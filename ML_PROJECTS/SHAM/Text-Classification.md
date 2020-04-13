@@ -191,15 +191,15 @@ Two common methods of feature-engineering for Text-Classification are:
   * **BOW**: Bag-of-Words
   * **TF-IDF**: Text-Frequency Inverse-Document-Frequency
  
-Text Classification using **BOW** for Naive-Bayes modeling uses simple word counts (with smooting) to construct the known probabilities for the Naive-Bayes models.
+Text Classification using **BOW** for Naive-Bayes modeling uses simple word counts (with smooting) to construct the known probabilities for the Naive-Bayes models.   
 **Summarizing the process:**
- 1. Iterate over the labelled spam emails and, for each word w in the entire training set, compute P(w|S): (number-of-spam-containing-w)+1 / number-of-spam + 2 
- 2. Compute P(w|H) the same way for ham emails.
- 3. Compute P(S) = (spam emails)/(spam emails)+(ham emails)
- 4. Compute P(H) = (ham emails)/(spam emails)+(ham emails)
- 5. Given a set of unlabelled test emails, iterate over each:
-   (a) Create a set {x1,...,xN} of the distinct words in the email. Ignore the words that you haven’t seen in the labelled training data.
-   (b) Compute P(S|x1,x2...xN)
+  1) Iterate over the labelled spam emails and, for each word w in the entire training set, compute P(w|S): (number-of-spam-containing-w)+1 / number-of-spam + 2 
+  2) Compute P(w|H) the same way for ham emails.
+  3) Compute P(S) = (spam emails)/(spam emails)+(ham emails)
+  4) Compute P(H) = (ham emails)/(spam emails)+(ham emails)
+  5) Given a set of unlabelled test emails, iterate over each:
+    (a) Create a set {x1,...,xN} of the distinct words in the email. Ignore the words that you haven’t seen in the labelled training data.
+    (b) Compute P(S|x1,x2...xN)
 
 With **TF-IDF**, we are not directly transforming the probabilities of each word. Instead, we can think about it as transforming the documents. With BOW each word in each document counted as 1, whereas with TF-IDF the words in the documents are counted as their TF-IDF weight. We get the known probabilities for Naive Bayes by adding up the TF-IDF weights instead of simply counting the number of words.
 
