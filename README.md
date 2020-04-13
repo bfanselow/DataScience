@@ -36,7 +36,7 @@ Each Machine-Learning project in the **ML_PROJECTS** folder has its own *README*
       * Feature extraction: moving from low-level features that are unsuitable for learning (we get poor testing results) to higher-level features which are useful for learning.
  7) Machine-Learning (predictive) modeling: train and validate models.
       * Improve model performance with algorithm tuning. 
- 8) Interpreting results: visualiizing outcomes to extract meaning.
+ 8) Interpreting results: visualizing outcomes to extract meaning.
 
 ---
 ## Machine-Learning common mathematical terms
