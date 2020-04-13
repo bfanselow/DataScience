@@ -38,7 +38,7 @@ Each Machine-Learning project in the **ML_PROJECTS** folder has its own *README*
  8) Interpreting results: visualiizing outcomes
 
 ---
-## Machine Learning Mathematics 
+## Machine-Learning common mathematical terms
 A **"vector"** is a list of one or more ordinary numbers. It can be thought of as a coordinate in an N-dimesional space. Mathematically this (Euclidean vector) represents line from the "origin" of that space to that coordinate where the origin is the zero-point of all dimensions.
 
 Machine learning uses **"feature vectors"** which can be thought of as a specific location (i.e. coordinate) in a N-dimensional "feature" space, where N is the number of unique attributes/features.  A feature-vector then is simply an array of N unique features.
@@ -53,15 +53,16 @@ arning algorithms perform mathematical computations on vectors and collections-o
  * **Tensor**: A multi dimensional matrix with rank n.
 
 ---
-## (Python) Machine Learning Tools 
+## (Python) Data-Science and Machine-Learning Tools 
 
 The following Python modules are used by the above ML projects:
- ## Modules from SciPy family
  * NumPy 
  * Pandas   
  * Matplotlib
- ## Built on top of SciPy
-   * Sklearn 
+ * Sklearn 
+ * Nltk
+
+**NumPy** and **Pandas** and **Matplotlib** are all part of the **SciPy** family of modules.
 
 **NumPy** and **Pandas** both provide fast and intuitive mathematical computation on arrays/vectors and matrices. While they seem somewhat similar, each module has unique functionalities and strengths. 
 
@@ -71,4 +72,7 @@ The **Pandas** module is mainly used for working with tabular data. It allows us
 
 The **Matplotlib** module is used for data visualization (drawing charts and graphs) which is extremely useful for better understanding of the data.
 
-**Sklearn** is a Machine Learning library providing various *classification*, *regression* and *clustering* algorithms including Naive-Bayes, Support-Vector-Machines, Random-Forests, Gradient-Boosting, k-means and DBSCAN and is desinged to interoperate with the above numerical libs.
+**Sklearn** is a Machine Learning library built on top of SciPy, which provides various *classification*, *regression* and *clustering* algorithms including Naive-Bayes, Support-Vector-Machines, Random-Forests, Gradient-Boosting, k-means and DBSCAN and is desinged to interoperate with the above numerical libs.
+ 
+**Nltk** (Natural Language Toolkit) is used specifically for data-science problems involving **text** data. It provides various text processing and cleaning tasks as tokenization, lemmatization, stemming, parsing, POS-tagging, etc.
+
