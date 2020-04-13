@@ -29,9 +29,11 @@ Accuracy alone doesn’t tell the full story when we’re working with a class-i
   - TN (Actual Normal and predicted Normal) = 90
   - FN (Actual Cancer and predicted Normal) = 8
   - FP (Actual Normal and predicted Cancer) = 1   
+
 The accuracy of this model calculates to 91%. But is this model really that useful, even being so accurate? This model isn’t able to predict the actual cancer patients, which can have worst of all consequences.
 
-### PRECISION: In a classification task, the precision for a class is the number of true positives divided by the total number of elements labeled as belonging to the positive class.
+### PRECISION
+In a classification task, the precision for a class is the number of true positives divided by the total number of elements labeled as belonging to the positive class.
 ```
   PRECISION = (TP)/(TP+FP)
 ```
@@ -46,7 +48,8 @@ High recall means that an algorithm returned most of the relevant results. Our c
 
 To fully evaluate the effectiveness of a model, it’s necessary to examine both precision and recall. Unfortunately, precision and recall are often in conflict. That is, improving precision typically reduces recall and vice versa. This is where F1-Score come in.
 
-### F1-Score: The F1 score is the harmonic mean of the precision and recall, where an F1 score reaches its best value at 1 (perfect precision and recall) and worst at 0.  Since the harmonic mean of a list of numbers skews strongly toward the least elements of the list, it tends (compared to the arithmetic mean) to mitigate the impact of large outliers and aggravate the impact of small ones.
+### F1-SCORE
+The F1 score is the harmonic mean of the precision and recall, where an F1 score reaches its best value at 1 (perfect precision and recall) and worst at 0.  Since the harmonic mean of a list of numbers skews strongly toward the least elements of the list, it tends (compared to the arithmetic mean) to mitigate the impact of large outliers and aggravate the impact of small ones.
 ```
   F1-SCORE = 2*(precision)*(recall) / (precision + recall)
 ```
