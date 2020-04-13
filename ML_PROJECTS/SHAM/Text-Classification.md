@@ -1,6 +1,6 @@
 # Document/Text-Classification Models for Spam Detection 
 
-Given some text input, automatically classifying it into predefined catagories (i.e. assign some label to it). This has many important practical uses such as: spam-filtering, sentiment-analysis, fake-news-detection, or genre-classification or comprehension level of a book.
+Given some text input, automatically classify it into predefined catagories (i.e. assign some label to it). This has many important practical uses such as: *spam-filtering, sentiment-analysis, fake-news-detection, genre-classification or comprehension level of a book* and more.
 
 ## Background
 Machine Learning models are categorized as **Supervised** or **Unsupervised**.  The majority of practical machine learning uses supervised learning, in which you know a set of input data (x1,x2,...x3) and the output variable (Y) and use the algorithm to learn the mapping function from the input to the output:
