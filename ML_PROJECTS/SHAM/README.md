@@ -4,7 +4,7 @@
 
 <img src="https://github.com/bfanselow/DataScience/blob/master/img/spam.jpg" width="100" height="100">
 
-Many of the concepts are discussed in [Text-Classification](https://github.com/bfanselow/DataScience/blob/master/ML_PROJECTS/SHAM/Text-Classification.md)
+Many of the concepts are discussed in **[Text-Classification](https://github.com/bfanselow/DataScience/blob/master/ML_PROJECTS/SHAM/Text-Classification.md)**
 
 ## Requires:
  * pip install nltk
