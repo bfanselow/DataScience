@@ -30,8 +30,8 @@ Our Spam/Ham Analysis Machine will use two (Supervised-ML) **Text Classification
  * **Naive Bayes**
  * **Support-Vector-Machine**
 
+---
 ## Naive Bayes Model
-
 First, we consider the basic Bayes Theorem:
 ```
  P(A|B) = P(A)*P(B|A) / P(B) 
