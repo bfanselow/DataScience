@@ -26,7 +26,7 @@ The problem with interpreting the human language is that it is not a set of rule
 However, with the help of Natural Language Processing (NLP) and different Machine-Learning "models" (classification-algorithms) like Naive Bayes (NB), Support-Vector-Machine (SVM), Boosting-Models and Neural Networks we can implement a set of computational rules.
 
 ---
-Our Spam/Ham Analysis Machine will use two (Supervised-ML) **Text Classification** models, classifying "spam" and "not-spam" (a.k.a. "ham").
+Our Spam/Ham Analysis Machine will use two (Supervised-ML) **Text Classification** models, classifying into two categores: "spam" and "not-spam" (a.k.a. "ham").
  * **Naive Bayes**
  * **Support-Vector-Machine**
 
@@ -184,24 +184,26 @@ P(S|x1,x2...xN) = P(x1)*P(S) * P(x2)*P(S) * ... P(xN|S)*P(S) / ( P(x1)*P(S) * P(
 A downside of Bayesian filtering in cases of more targeted spam is that spammers will start using words or whole pieces of text that will lower the score. During prolonged use, these words might get associated with spam, which is called poisoning. 
 
 ## Smoothing 
-Another pitfall is that a spammer could slip a word into spam that was only ever seen in ham (say "science"). This will set the entire probablity of spam to zero.  This can be addressed with a technique called "smoothing" in which we start each word count at 1 instaed of zero. Since this overesimates probablity we have to add 2 to the denominator
+Another pitfall is that a spammer could slip a word into spam that was only ever seen in the ham samples (say "science"), which will set the entire probablity of spam to zero.  This can be addressed with a technique called "smoothing" in which we start each word count at 1 instaed of zero. Since this overesimates probablity we have to add 2 to the denominator
 
 ## Feature Engineering for Spam Detection:
 Two common methods of feature-engineering for Text-Classification are:
   * **BOW**: Bag-of-Words
-  * **TF-IDF**: Text-Frequency Inverse-Docuemnt-Frequency
+  * **TF-IDF**: Text-Frequency Inverse-Document-Frequency
  
-Text Classification with BOW used in Naive-Bayes uses simple word counts (with smooting) to construct the known probabilities for the Naive-Bayes models.
+Text Classification using **BOW** for Naive-Bayes modeling uses simple word counts (with smooting) to construct the known probabilities for the Naive-Bayes models.
+**Summarizing the process:**
  1. Iterate over the labelled spam emails and, for each word w in the entire training set, compute P(w|S): (number-of-spam-containing-w)+1 / number-of-spam + 2 
  2. Compute P(w|H) the same way for ham emails.
- 3. Compute P(S) = |spam emails|/ |spam emails|+|ham emails|
- 4. Comput P(H) = |ham emails|/ |spam emails|+|ham emails|
+ 3. Compute P(S) = (spam emails)/(spam emails)+(ham emails)
+ 4. Compute P(H) = (ham emails)/(spam emails)+(ham emails)
  5. Given a set of unlabelled test emails, iterate over each:
    (a) Create a set {x1,...,xN} of the distinct words in the email. Ignore the words that you haven’t seen in the labelled training data.
    (b) Compute P(S|x1,x2...xN)
 
 With **TF-IDF**, we are not directly transforming the probabilities of each word. Instead, we can think about it as transforming the documents. With BOW each word in each document counted as 1, whereas with TF-IDF the words in the documents are counted as their TF-IDF weight. We get the known probabilities for Naive Bayes by adding up the TF-IDF weights instead of simply counting the number of words.
 
+---
 ## Support Vector Machine
  An SVM model is a representation of the examples as points in space, mapped so that the examples of the separate categories are divided by a clear gap that is as wide as possible. New examples are then mapped into that same space and predicted to belong to a category based on the side of the gap on which they fall.
 
