@@ -27,11 +27,11 @@ However, with the help of Natural Language Processing (NLP) and different Machin
 
 ---
 Our Spam/Ham Analysis Machine will use two (Supervised-ML) **Text Classification** models, classifying into two categores: "spam" and "not-spam" (a.k.a. "ham").
- * **Naive Bayes**
- * **Support-Vector-Machine**
+ 1) **Naive Bayes**
+ 2) **Support-Vector-Machine**
 
 ---
-## Naive Bayes Model
+## Model-1: Naive Bayes
 First, we consider the basic Bayes Theorem:
 ```
  P(A|B) = P(A)*P(B|A) / P(B) 
@@ -192,6 +192,7 @@ Two common methods of feature-engineering for Text-Classification are:
   * **TF-IDF**: Text-Frequency Inverse-Document-Frequency
  
 Text Classification using **BOW** for Naive-Bayes modeling uses simple word counts (with smooting) to construct the known probabilities for the Naive-Bayes models.   
+
 **Summarizing the process:**
   1) Iterate over the labelled spam emails and, for each word w in the entire training set, compute P(w|S): (number-of-spam-containing-w)+1 / number-of-spam + 2 
   2) Compute P(w|H) the same way for ham emails.
@@ -204,7 +205,7 @@ Text Classification using **BOW** for Naive-Bayes modeling uses simple word coun
 With **TF-IDF**, we are not directly transforming the probabilities of each word. Instead, we can think about it as transforming the documents. With BOW each word in each document counted as 1, whereas with TF-IDF the words in the documents are counted as their TF-IDF weight. We get the known probabilities for Naive Bayes by adding up the TF-IDF weights instead of simply counting the number of words.
 
 ---
-## Support Vector Machine
+## Model-2: Support Vector Machine
  An SVM model is a representation of the examples as points in space, mapped so that the examples of the separate categories are divided by a clear gap that is as wide as possible. New examples are then mapped into that same space and predicted to belong to a category based on the side of the gap on which they fall.
 
 We can learn what this distribution is from messages that were identified as spam and messages that were identified as not being spam (sometimes called ham). 
