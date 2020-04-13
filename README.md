@@ -49,9 +49,9 @@ arning algorithms perform mathematical computations on vectors and collections-o
 
 **Machine Leanring computational terms:**
  * **Scalar**: A single number.
- * **Vector** : A list of values.(tensor of rank 1)
- * **Matrix**: A two dimensional list of values.(tensor or rank 2)
- * **Tensor**: A multi dimensional matrix with rank n.
+ * **Vector** : A list of values (tensor of rank 1).
+ * **Matrix**: A two dimensional list of values (tensor or rank 2).
+ * **Tensor**: A multi dimensional matrix with rank **N**.
 
 ---
 ## (Python) Data-Science and Machine-Learning Tools 
