@@ -6,7 +6,7 @@
 
 ## Summary
 Two different approaches and code-bases are used for solving the same (Spam-Classification) problem using the same data set:
-  * **spam_ham_scratch.py**: Spam-detection using Naive-Bayes algorithm (comparing both TF-IDF and BOW feature-engineering). Much of the data-science and machine-learning code is built from scratch as a learninng experience.  Many of the code ideas were inspired by an article in: [<u>towardsdatascience.com</u>](https://towardsdatascience.com/spam-classifier-in-python-from-scratch-27a98ddd8e73)
+  * **spam_ham_scratch.py**: Spam-detection using Naive-Bayes algorithm (comparing both TF-IDF and BOW feature-engineering). Many of the standard data-science and machine-learning logic blocks are built from scratch as a learning experience.  Some of the code ideas were inspired by an article in: [<u>towardsdatascience.com</u>](https://towardsdatascience.com/spam-classifier-in-python-from-scratch-27a98ddd8e73)
   * **spam_ham_skl.py**: Here we make use of the built-in methods provided by the **sklearn** module for both Naive-Bayes and SVM algorithms. We compare classification results to our homegrown solution.
 
 Several Document/Text-Classfication concepts are discussed in **[Text-Classification](https://github.com/bfanselow/DataScience/blob/master/ML_PROJECTS/SHAM/Text-Classification.md)**
