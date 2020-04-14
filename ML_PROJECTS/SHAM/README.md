@@ -10,5 +10,11 @@ Many of the concepts are discussed in **[Text-Classification](https://github.com
  * pip install nltk
  * pip install numpy 
  * pip install pandas 
- * pip install matplotlib 
- * pip install sklearn 
+ * from Python shell download english stop words:
+```
+   >>> import nltk
+       nltk.download(): select "D" for Download
+                          ==> select "punkt"
+                          ==> select "stopwords"
+```
+

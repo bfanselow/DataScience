@@ -9,7 +9,9 @@
     * pip install nltk
     * from Python shell download english stop words: 
         >>> import nltk
-            nltk.download()   ==> select "D", select "punkt" 
+            nltk.download(): select "D"
+                              ==> select "punkt" 
+                              ==> select "stopwords" 
 
 """
 
