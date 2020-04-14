@@ -26,7 +26,7 @@ The problem with interpreting the human language is that it is not a set of rule
 However, with the help of Natural Language Processing (NLP) and different Machine-Learning "models" (classification-algorithms) like Naive Bayes (NB), Support-Vector-Machine (SVM), Boosting-Models and Neural Networks we can implement a set of computational rules.
 
 ---
-Our Spam/Ham Analysis Machine will use two (Supervised-ML) **Text Classification** models, classifying into two categores: "spam" and "not-spam" (a.k.a. "ham").
+Our Spam/Ham Analysis Machine will use two (Supervised-ML) **Text Classification** models, classifying into two categories: "spam" and "not-spam" (a.k.a. "ham").
  1) **Naive Bayes**
  2) **Support-Vector-Machine**
 
