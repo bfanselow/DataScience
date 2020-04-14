@@ -7,7 +7,7 @@
 
   Requires:
     * pip install nltk
-    * from Python shell download english stop words: 
+    * from Python shell download "punkt" tokenizer and english stopwords: 
         >>> import nltk
             nltk.download(): select "D"
                               ==> select "punkt" 
@@ -38,16 +38,17 @@ def message_to_feature_words(message, lower_case=True, stem=True, stop_words=Tru
     ## Keep only if > 2 chars
     words = [w for w in words if len(w) > 2]
 
+    ## if N-gram, compile n-grams and return list
+    if ngram > 1:
+        words_ngram = []
+        for i in range(len(words) - ngram + 1):
+            words_ngram += [' '.join(words[i:i + ngram])]
+        return(words_ngram) 
+    
     ## remove STOP words
     if stop_words:
         sw = stopwords.words('english')
         words = [word for word in words if word not in sw]
-    
-    if ngram > 1:
-        w = []
-        for i in range(len(words) - ngram + 1):
-            w += [' '.join(words[i:i + ngram])]
-        words.extend(w)
     
     ## word stemming
     if stem:
