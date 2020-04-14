@@ -1,13 +1,13 @@
 # SHAM
 ## Spam/Ham Analysis Machine
-### A simple Spam-Detection exercise in Python3 for learning some of the core concepts of Natural-Language-Processing (NLP) and two of the main Text/Document-Classification Machine-Learning models.  
+### A simple Spam-Detection exercise in Python3 for learning some of the core concepts of Natural-Language-Processing (NLP) and Text/Document-Classification.  
 
 <img src="https://github.com/bfanselow/DataScience/blob/master/img/spam.jpg" width="100" height="100">
 
 ## Summary
 Two different approaches and code-bases are used for solving the same (Spam-Classification) problem using the same data set:
-  * **spam_ham_scratch.py**: Much of the data-science and machine-learning code is built from scratch as a learninng experience.  Many of the code ideas were inspired by an article in: [<u>towardsdatascience.com</u>](https://towardsdatascience.com/spam-classifier-in-python-from-scratch-27a98ddd8e73)
-  * **spam_ham_skl.py**: Here we make use of the built-in methods provided by the **sklearn** module, and compare results to our homegrown solution.
+  * **spam_ham_scratch.py**: Spam-detection using Naive-Bayes algorithm (comparing both TF-IDF and BOW feature-engineering). Much of the data-science and machine-learning code is built from scratch as a learninng experience.  Many of the code ideas were inspired by an article in: [<u>towardsdatascience.com</u>](https://towardsdatascience.com/spam-classifier-in-python-from-scratch-27a98ddd8e73)
+  * **spam_ham_skl.py**: Here we make use of the built-in methods provided by the **sklearn** module for both Naive-Bayes and SVM algorithms. We compare classification results to our homegrown solution.
 
 Several Document/Text-Classfication concepts are discussed in **[Text-Classification](https://github.com/bfanselow/DataScience/blob/master/ML_PROJECTS/SHAM/Text-Classification.md)**
  
