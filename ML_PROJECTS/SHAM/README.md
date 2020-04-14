@@ -12,7 +12,7 @@ Two different approaches and code-bases are used for solving the same (Spam-Clas
 Several Document/Text-Classfication concepts are discussed in **[Text-Classification](https://github.com/bfanselow/DataScience/blob/master/ML_PROJECTS/SHAM/Text-Classification.md)**
  
 ## Data Source 
-We use the **[SMS Spam Collection Data Set](Dataset: https://www.kaggle.com/uciml/sms-spam-collection-dataset)**, a CSV file with each row having a label (spam|ham) and an SMS message. 
+We use the **[SMS Spam Collection Data Set](https://www.kaggle.com/uciml/sms-spam-collection-dataset)**, a CSV file with each row having a label (spam|ham) and an SMS message. 
 
 
 ## Requires:
