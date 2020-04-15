@@ -184,10 +184,10 @@ Text Classification using **BOW** for Naive-Bayes modeling uses simple word-coun
 ### Summarizing the NBC-BOW Text-Classification process:
 **TRAINING THE ALGORITHM, CREATING THE MODEL**   
 Iterate over the labelled spam/ham messages in the training set. For each word **w** in the set:  
-    1) compute P(w|S): (N-spam-messages-containing-w)+1 / (N-spam-messages)+2
-    2) compute P(w|S): (N-ham-messages-containing-w)+1 / (N-ham-messages)+2 
-    3) Compute P(S) = (N-spam-messsages)/(total-messages)
-    4) Compute P(H) = (N-ham-messages)/(total-messages)
+  1. compute P(w|S): (N-spam-messages-containing-w)+1 / (N-spam-messages)+2
+  2. compute P(w|S): (N-ham-messages-containing-w)+1 / (N-ham-messages)+2 
+  3. Compute P(S) = (N-spam-messsages)/(total-messages)
+  4. Compute P(H) = (N-ham-messages)/(total-messages)
 
 **TESTING THE MODEL**   
 Iterate over a set of (unlabelled) test messages. For each message: 
