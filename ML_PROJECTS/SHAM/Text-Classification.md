@@ -45,7 +45,6 @@ When we know the following from previous observation:
   * how likely A is on its own:  P(A)
   * how likely B is on its own: P(B)
 
-
 For example, if we know:
   1) We have identified by historical observation that dangerous fires are rare on any given day: P(Fire) = 1% 
      (num-days-with-fire-per-year/num-days-per-year)
@@ -54,10 +53,10 @@ For example, if we know:
      (num-days-with-smoke-per-year/num-days-per-year)
      (This includes smoke with or without dangerous fire: i.e. barbeques, farmers doing controlled burns, etc.)
 
- What we want to know/predict: 
-   How likely is it that there is a dangerous fire when we see some smoke?
+What we want to know/predict: 
+  How likely is it that there is a dangerous fire when we see some smoke?
 
- Answer:
+Answer:
 ```
   P(Fire|Smoke) = P(Fire)*P(Smoke|Fire) / P(Smoke) = (.01)*(.97) / .09 = .1077 = 10.8% 
 ```
@@ -104,9 +103,9 @@ So now we can complete our formula:
   
 If you take the new PC test and it says "Yes", there is only a 7% chance you actually have prostate cancer. The new test has a 7% FALSE-POSITIVE rate.
 
-What we have done here is to re-write the numerator for a special version of Bayes Theorem:
+What we have done here is to re-write the denominator for a special version of Bayes Theorem when we are unable to measure P(B) directly:
 ```
-  P(A|B) = P(A)P(B|A) / ( P(A)P(B|A) + P(!A)P(B|!A)
+ P(A|B) = P(A)*P(B|A) / P(B)  ===>  P(A|B) = P(A)P(B|A) / P(A)P(B|A) + P(!A)P(B|!A)
 ```
 
 ---
@@ -139,11 +138,12 @@ Bayes Equation:
  P(Anne|First) = (15/30)*4% / (15/30)*4% + (5/30)*6% + (10/30)*3%  = 15*4% / (15*4% + 5*6% + 10*3%) = 0.6/0.6+0.3+0.3 = 50%
 ```
 
-One ciritcal assumption which allowed us to make these additive calculations in the denominator is that those conditions all have totally independent probabilites. Oftentimes, this is true. But it is not always the case. When we do make these (sometimes naive) assumptions, Bayes Theorem is referred to as a **Naive Bayes Classification**
+One ciritcal assumption which allowed us to make these additive calculations in the denominator is that those conditions all have totally independent probabilites. This is true, but is not always the case. When we do make this (naive) assumption, Bayes Classification is referred to as a **Naive Bayes Classification** (NBC).
 
 ---
 
-Applying Naive Bayes Classification (NBC) to Spam detection, we have two conditions - spam or NOT-spam (HAM).
+### Applying Bayes Theorem to Spam detection:
+In spam filtering/detection we make the assumption that one class of messages (i.e. spam messages in this case) tend to have have a different word distribution than messages in the other class (i.e. non-spam messages). For example, one might imagine the word "free" is more common in spam messages than non-spam. 
 ```
 P(S|w) = P(w|S)*P(S) / P(w)
 ```
@@ -152,57 +152,70 @@ P(S|w) = P(w|S)*P(S) / P(w)
   * P(w|S):  Probability of finding that word "w" is in a spam message
   * P(S):    Probability that a message is spam 
   * P(w):    Probability that word "w" is in any message 
+
+This works when we can measure all values, P(w|S),P(S),P(w), directly.
+
+If we are unable to measure P(w) directly, we can calculate this we can use Naive Bayes Classification, since we have two independent conditions - spam or NOT-spam (HAM).
+```
+P(S|w) = P(w|S)*P(S) / P(w|S)*P(S) + P(w|H)*P(H) 
+```
  
-Which is equivelent to the following (if conditions are independent, which they are in this case)
+If we represent every email message as a "vector" having the set (w1,w2,w3,,,wN) distinct words, we can calculate the probablity of spam with:
 ```
-P(S|w) = P(w|S)*P(S) / P(w|S)*P(S) + P(w|!S)*P(!S) =  P(w|S)*P(S) / P(w|S)*P(S) + P(w|H)*P(H) 
+P(S|w1 ∩ w2 ∩... ∩ wN) = P(w1 ∩ w2 ∩...∩ wN|S)*P(S) / P(w1 ∩ w2 ∩...∩ wN) 
 ```
-where:
-  * P(!S) = P(H):   Probability that a message is NOT spam (is HAM)
-  * P(w|!S) = P(w|H): Probability of finding that word "w" is in a NON-spam message
+where *P(w1 ∩ w2 ∩ w3...∩ wN)* indicates the probability of **intersection** of all words "w".
 
- 
-In spam filtering/detection we make the assumption that one class of messages (i.e. spam messages in this case) tend to have have a different word distribution than messages in the other class (i.e. non-spam messages). For example, one might imagine the word "free" is more common in spam messages than non-spam. 
-
-If we represnt every email as a "vector" having the set (x1,x2,x3,,,xN) distinct words, we can calculate the probablity of spam with:
+If we (naively) assume that the probability of each word is independent of the probability of all other words (which is a rasonable assumption if we already factor in whether the email is spam or not, then we can simplify this to an approximate solution, taking the product of each word-probability expression:
 ```
-P(S|x1,x2...xN) = P(x1,x2,...N|S)*P(S) / P(x1,x2,...xN|S)*P(S) + P(x1,x2...xN|H)*P(H) 
+P(S|w1 ∩ w2 ∩ ...∩ wN) = P(w1)*P(S) * P(w2)*P(S)*...*P(wN|S)*P(S) / P(w1)*P(w2)*...*P(wN)
 ```
 
-We will assume that the probability of the word x1 (say "viagra") is independent of the probability of the word x2 (say "pills") (which is a rasonable assumption if we already factor in whether the email is spam or not.
-
-This allow us to simplify to an approximate solution, taking the product of each word-prob expression:
-```
-P(S|x1,x2...xN) = PROD{P(x_i)*P(S)} /  PROD{P(x_i)*P(S)} +  PROD{P(x_i)*P(H)} 
-```
- OR
-```
-P(S|x1,x2...xN) = P(x1)*P(S) * P(x2)*P(S) * ... P(xN|S)*P(S) / ( P(x1)*P(S) * P(x2)*P(S) * ... P(xN|S)*P(S) ) + ( P(x1)*P(H) * P(x2)*P(H) * ... P(xN|H) )
-```
-
-## Poisoning
-A downside of Bayesian filtering in cases of more targeted spam is that spammers will start using words or whole pieces of text that will lower the score. During prolonged use, these words might get associated with spam, which is called poisoning. 
-
-## Smoothing 
-Another pitfall is that a spammer could slip a word into spam that was only ever seen in the ham samples (say "science"), which will set the entire probablity of spam to zero.  This can be addressed with a technique called "smoothing" in which we start each word count at 1 instaed of zero. Since this overesimates probablity we have to add 2 to the denominator
+If we encounter a word in testing dataset which is not part of training dataset P(w) will be 0, which will make the P(S|w) undefined (since we would have to divide by P(w). To address this issue we introduce **additive smoothing**. In additive smoothing we add a number N (typcially 1) to the numerator and add N times number of classes (words) to the denominator.
 
 ## Feature Engineering for Spam Detection:
 Two common methods of feature-engineering for Text-Classification are:
   * **BOW**: Bag-of-Words
   * **TF-IDF**: Text-Frequency Inverse-Document-Frequency
- 
-Text Classification using **BOW** for Naive-Bayes modeling uses simple word counts (with smooting) to construct the known probabilities for the Naive-Bayes models.   
 
-**Summarizing the process:**
-  1) Iterate over the labelled spam emails and, for each word w in the entire training set, compute P(w|S): (number-of-spam-containing-w)+1 / number-of-spam + 2 
-  2) Compute P(w|H) the same way for ham emails.
-  3) Compute P(S) = (spam emails)/(spam emails)+(ham emails)
-  4) Compute P(H) = (ham emails)/(spam emails)+(ham emails)
-  5) Given a set of unlabelled test emails, iterate over each:
-    (a) Create a set {x1,...,xN} of the distinct words in the email. Ignore the words that you haven’t seen in the labelled training data.
-    (b) Compute P(S|x1,x2...xN)
+## Naive-Bayes-Classification (NBC) with BOW: 
+Text Classification using **BOW** for Naive-Bayes modeling uses simple word-counts (with additive-smoothing) to construct the known probabilities for the Naive-Bayes models.   
+
+### Summarizing the NBC-BOW Text-Classification process:
+**TRAINING THE ALGORITHM, CREATING THE MODEL**   
+  Iterate over the labelled spam/ham messages in the training set. For each word **w** in the set:  
+    1) compute P(w|S): (N-spam-messages-containing-w)+1 / (N-spam-messages)+2
+    2) compute P(w|S): (N-ham-messages-containing-w)+1 / (N-ham-messages)+2 
+    3) Compute P(S) = (N-spam-messsages)/(total-messages)
+    4) Compute P(H) = (N-ham-messages)/(total-messages)
+
+**TESTING THE MODEL**
+  Iterate over a set of (unlabelled) test messages. For each message: 
+    1) Create a set {w1,...,wN} of the distinct words in the message.
+    2) Compute P(S|w1 ∩ w2 ∩ ...∩ wN) =  P(w1)*P(S) * P(w2)*P(S)*...*P(wN|S)*P(S) / P(w1)*P(w2)*...*P(wN)
+    3) Compute P(H|w1 ∩ w2 ∩...∩ wN) = P(w1)*P(H) * P(w2)*P(H)*...*P(wN|H)*P(H) / P(w1)*P(w2)*...*P(wN)
+    4) Classify as SPAM|HAM by comparing 2 and 3.  
+       Since we are comparing, we can get rid of the denominator and just see which is numerator is bigger. 
+        * SPAM if (P(w1)*P(S))*(P(w2)*P(S))*...*P(wN|S)*P(S) > (P(w1)*P(H))*(P(w2)*P(H))*...*P(wN|H)*P(H)
+        * HAM  if (P(w1)*P(S))*(P(w2)*P(S))*...*P(wN|S)*P(S) < (P(w1)*P(H))*(P(w2)*P(H))*...*P(wN|H)*P(H)
+
+If one of the words in the testing set was never seen in the training set, this will set the entire probablity to zero. Even if this never occurs, these calculations involve multiplying a lot of small numbers together which can lead to an "underflow" of numerical precision. To address these issues it is common practice to use a *log-transform* of the probabilities, so that our classification becomes:
+```
+  * SPAM if log( (P(w1)*P(S))*(P(w2)*P(S))*...*P(wN|S)*P(S) ) > log( (P(w1)*P(H))*(P(w2)*P(H))*...*P(wN|H)*P(H) )
+  * HAM  if log( (P(w1)*P(S))*(P(w2)*P(S))*...*P(wN|S)*P(S) ) < log( (P(w1)*P(H))*(P(w2)*P(H))*...*P(wN|H)*P(H) )
+```
+
+Since log(ab) = log(a) + log(b), our classfication determination becomes:
+```
+  * SPAM if log(P(w1)*P(S)) + log((P(w2)*P(S)) + ... log(P(wN|S)*P(S)) > log(P(w1)*P(H)) + log(P(w2)*P(H))+...+log(P(wN|H)*P(H))
+  * HAM  if log(P(w1)*P(S)) + log((P(w2)*P(S)) + ... log(P(wN|S)*P(S)) < log(P(w1)*P(H)) + log(P(w2)*P(H))+...+log(P(wN|H)*P(H))
+```
 
 With **TF-IDF**, we are not directly transforming the probabilities of each word. Instead, we can think about it as transforming the documents. With BOW each word in each document counted as 1, whereas with TF-IDF the words in the documents are counted as their TF-IDF weight. We get the known probabilities for Naive Bayes by adding up the TF-IDF weights instead of simply counting the number of words.
+
+## Poisoning
+A downside of this type of Bayesian filtering in cases of more targeted spam is that spammers will start using words (or whole pieces of text) that will deliberately lower the probablity score. After prolonged training, these words might get associated with spam, which is called *poisoning*. 
+
 
 ---
 ## Model-2: Support Vector Machine
