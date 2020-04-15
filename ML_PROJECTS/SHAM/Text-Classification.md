@@ -211,6 +211,7 @@ Since log(ab) = log(a) + log(b), our classfication determination becomes:
   * HAM  if: log(P(w1)*P(S)) + log((P(w2)*P(S)) + ... log(P(wN|S)*P(S)) < log(P(w1)*P(H)) + log(P(w2)*P(H))+...+log(P(wN|H)*P(H))
 ```
 
+## Naive-Bayes-Classification (NBC) with TF-IDF: 
 With **TF-IDF**, we are not directly transforming the probabilities of each word. Instead, we can think about it as transforming the documents. With BOW each word in each document counted as 1, whereas with TF-IDF the words in the documents are counted as their TF-IDF weight. We get the known probabilities for Naive Bayes by adding up the TF-IDF weights instead of simply counting the number of words.
 
 ## Poisoning
