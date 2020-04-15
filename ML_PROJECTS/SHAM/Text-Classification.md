@@ -196,19 +196,19 @@ Iterate over a set of (unlabelled) test messages. For each message:
   3. Compute P(H|w1 ∩ w2 ∩...∩ wN) = P(w1)\*P(H) \* P(w2)\*P(H)\*...\*P(wN|H)\*P(H) / P(w1)\*P(w2)\*...\*P(wN)
   4. Classify as SPAM|HAM by comparing 2 and 3.   
      Since we are comparing, we can get rid of the denominator and just see which is numerator is bigger.    
-        * SPAM if (P(w1)\*P(S))\*(P(w2)\*P(S))\*...\*P(wN|S)\*P(S) > (P(w1)\*P(H))\*(P(w2)\*P(H))\*...\*P(wN|H)\*P(H)
-        * HAM  if (P(w1)\*P(S))\*(P(w2)\*P(S))\*...\*P(wN|S)\*P(S) < (P(w1)\*P(H))\*(P(w2)\*P(H))\*...\*P(wN|H)\*P(H)
+        * SPAM if: (P(w1)\*P(S))\*(P(w2)\*P(S))\*...\*P(wN|S)\*P(S) > (P(w1)\*P(H))\*(P(w2)\*P(H))\*...\*P(wN|H)\*P(H)
+        * HAM  if: (P(w1)\*P(S))\*(P(w2)\*P(S))\*...\*P(wN|S)\*P(S) < (P(w1)\*P(H))\*(P(w2)\*P(H))\*...\*P(wN|H)\*P(H)
 
 If one of the words in the testing set was never seen in the training set, this will force the entire probablity to zero. Even if this never occurs, these calculations involve multiplying a lot of small numbers together which can lead to an "underflow" of numerical precision. To address these issues it is common practice to use a *log-transform* of the probabilities, so that our classification becomes:
 ```
-  * SPAM if log( (P(w1)*P(S))*(P(w2)*P(S))*...*P(wN|S)*P(S) ) > log( (P(w1)*P(H))*(P(w2)*P(H))*...*P(wN|H)*P(H) )
-  * HAM  if log( (P(w1)*P(S))*(P(w2)*P(S))*...*P(wN|S)*P(S) ) < log( (P(w1)*P(H))*(P(w2)*P(H))*...*P(wN|H)*P(H) )
+  * SPAM if: log( (P(w1)*P(S))*(P(w2)*P(S))*...*P(wN|S)*P(S) ) > log( (P(w1)*P(H))*(P(w2)*P(H))*...*P(wN|H)*P(H) )
+  * HAM  if: log( (P(w1)*P(S))*(P(w2)*P(S))*...*P(wN|S)*P(S) ) < log( (P(w1)*P(H))*(P(w2)*P(H))*...*P(wN|H)*P(H) )
 ```
 
 Since log(ab) = log(a) + log(b), our classfication determination becomes:
 ```
-  * SPAM if log(P(w1)*P(S)) + log((P(w2)*P(S)) + ... log(P(wN|S)*P(S)) > log(P(w1)*P(H)) + log(P(w2)*P(H))+...+log(P(wN|H)*P(H))
-  * HAM  if log(P(w1)*P(S)) + log((P(w2)*P(S)) + ... log(P(wN|S)*P(S)) < log(P(w1)*P(H)) + log(P(w2)*P(H))+...+log(P(wN|H)*P(H))
+  * SPAM if: log(P(w1)*P(S)) + log((P(w2)*P(S)) + ... log(P(wN|S)*P(S)) > log(P(w1)*P(H)) + log(P(w2)*P(H))+...+log(P(wN|H)*P(H))
+  * HAM  if: log(P(w1)*P(S)) + log((P(w2)*P(S)) + ... log(P(wN|S)*P(S)) < log(P(w1)*P(H)) + log(P(w2)*P(H))+...+log(P(wN|H)*P(H))
 ```
 
 With **TF-IDF**, we are not directly transforming the probabilities of each word. Instead, we can think about it as transforming the documents. With BOW each word in each document counted as 1, whereas with TF-IDF the words in the documents are counted as their TF-IDF weight. We get the known probabilities for Naive Bayes by adding up the TF-IDF weights instead of simply counting the number of words.
