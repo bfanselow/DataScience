@@ -191,15 +191,15 @@ Iterate over the labelled spam/ham messages in the training set. For each word *
 
 **TESTING THE MODEL**   
 Iterate over a set of (unlabelled) test messages. For each message: 
-    1) Create a set {w1,...,wN} of the distinct words in the message.
-    2) Compute P(S|w1 ∩ w2 ∩ ...∩ wN) =  P(w1)*P(S) * P(w2)*P(S)*...*P(wN|S)*P(S) / P(w1)*P(w2)*...*P(wN)
-    3) Compute P(H|w1 ∩ w2 ∩...∩ wN) = P(w1)*P(H) * P(w2)*P(H)*...*P(wN|H)*P(H) / P(w1)*P(w2)*...*P(wN)
-    4) Classify as SPAM|HAM by comparing 2 and 3.  
-       Since we are comparing, we can get rid of the denominator and just see which is numerator is bigger. 
+  1. Create a set {w1,...,wN} of the distinct words in the message.
+  2. Compute P(S|w1 ∩ w2 ∩ ...∩ wN) =  P(w1)*P(S) * P(w2)*P(S)*...*P(wN|S)*P(S) / P(w1)*P(w2)*...*P(wN)
+  3. Compute P(H|w1 ∩ w2 ∩...∩ wN) = P(w1)*P(H) * P(w2)*P(H)*...*P(wN|H)*P(H) / P(w1)*P(w2)*...*P(wN)
+  4. Classify as SPAM|HAM by comparing 2 and 3.   
+     Since we are comparing, we can get rid of the denominator and just see which is numerator is bigger.    
         * SPAM if (P(w1)*P(S))*(P(w2)*P(S))*...*P(wN|S)*P(S) > (P(w1)*P(H))*(P(w2)*P(H))*...*P(wN|H)*P(H)
         * HAM  if (P(w1)*P(S))*(P(w2)*P(S))*...*P(wN|S)*P(S) < (P(w1)*P(H))*(P(w2)*P(H))*...*P(wN|H)*P(H)
 
-If one of the words in the testing set was never seen in the training set, this will set the entire probablity to zero. Even if this never occurs, these calculations involve multiplying a lot of small numbers together which can lead to an "underflow" of numerical precision. To address these issues it is common practice to use a *log-transform* of the probabilities, so that our classification becomes:
+If one of the words in the testing set was never seen in the training set, this will force the entire probablity to zero. Even if this never occurs, these calculations involve multiplying a lot of small numbers together which can lead to an "underflow" of numerical precision. To address these issues it is common practice to use a *log-transform* of the probabilities, so that our classification becomes:
 ```
   * SPAM if log( (P(w1)*P(S))*(P(w2)*P(S))*...*P(wN|S)*P(S) ) > log( (P(w1)*P(H))*(P(w2)*P(H))*...*P(wN|H)*P(H) )
   * HAM  if log( (P(w1)*P(S))*(P(w2)*P(S))*...*P(wN|S)*P(S) ) < log( (P(w1)*P(H))*(P(w2)*P(H))*...*P(wN|H)*P(H) )
