@@ -160,18 +160,18 @@ If we are unable to measure P(w) directly, we can calculate this we can use Naiv
 P(S|w) = P(w|S)*P(S) / P(w|S)*P(S) + P(w|H)*P(H) 
 ```
  
-If we represent every email message as a "vector" having the set (w1,w2,w3,,,wN) distinct words, we can calculate the probablity of spam with:
+If we represent every email message as a "vector" having the set (w1,w2,w3,...wN) of distinct words, we can calculate the probablity of spam with:
 ```
 P(S|w1 ∩ w2 ∩... ∩ wN) = P(w1 ∩ w2 ∩...∩ wN|S)*P(S) / P(w1 ∩ w2 ∩...∩ wN) 
 ```
 where *P(w1 ∩ w2 ∩ w3...∩ wN)* indicates the probability of **intersection** of all words "w".
 
-If we (naively) assume that the probability of each word is independent of the probability of all other words (which is a rasonable assumption if we already factor in whether the email is spam or not, then we can simplify this to an approximate solution, taking the product of each word-probability expression:
+If we (naively) assume that the probability of each word is independent of the probability of all other words (which is a rasonable assumption if we already factor in whether the email is spam or not) then we can simplify this to an approximate solution, taking the product of each word-probability expression:
 ```
 P(S|w1 ∩ w2 ∩ ...∩ wN) = P(w1)*P(S) * P(w2)*P(S)*...*P(wN|S)*P(S) / P(w1)*P(w2)*...*P(wN)
 ```
 
-If we encounter a word in testing dataset which is not part of training dataset P(w) will be 0, which will make the P(S|w) undefined (since we would have to divide by P(w). To address this issue we introduce **additive smoothing**. In additive smoothing we add a number N (typcially 1) to the numerator and add N times number of classes (words) to the denominator.
+If we encounter a word in the testing dataset which is not part of training dataset, P(w) will be 0 which will make the P(S|w) undefined (since we would have to divide by P(w). To address this issue we introduce **additive smoothing**. In additive smoothing we add a number N (typcially 1) to the numerator and add N times number of classes (words) to the denominator.
 
 ## Feature Engineering for Spam Detection:
 Two common methods of feature-engineering for Text-Classification are:
@@ -183,14 +183,14 @@ Text Classification using **BOW** for Naive-Bayes modeling uses simple word-coun
 
 ### Summarizing the NBC-BOW Text-Classification process:
 **TRAINING THE ALGORITHM, CREATING THE MODEL**   
-  Iterate over the labelled spam/ham messages in the training set. For each word **w** in the set:  
+Iterate over the labelled spam/ham messages in the training set. For each word **w** in the set:  
     1) compute P(w|S): (N-spam-messages-containing-w)+1 / (N-spam-messages)+2
     2) compute P(w|S): (N-ham-messages-containing-w)+1 / (N-ham-messages)+2 
     3) Compute P(S) = (N-spam-messsages)/(total-messages)
     4) Compute P(H) = (N-ham-messages)/(total-messages)
 
-**TESTING THE MODEL**
-  Iterate over a set of (unlabelled) test messages. For each message: 
+**TESTING THE MODEL**   
+Iterate over a set of (unlabelled) test messages. For each message: 
     1) Create a set {w1,...,wN} of the distinct words in the message.
     2) Compute P(S|w1 ∩ w2 ∩ ...∩ wN) =  P(w1)*P(S) * P(w2)*P(S)*...*P(wN|S)*P(S) / P(w1)*P(w2)*...*P(wN)
     3) Compute P(H|w1 ∩ w2 ∩...∩ wN) = P(w1)*P(H) * P(w2)*P(H)*...*P(wN|H)*P(H) / P(w1)*P(w2)*...*P(wN)
