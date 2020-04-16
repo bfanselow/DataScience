@@ -217,7 +217,7 @@ Which can be fruther simplified to:
 ```
 
 ## Naive-Bayes-Classification (NBC) with TF-IDF: 
-With **TF-IDF**, we are not directly transforming the probabilities of each word. Instead, we can think about it as transforming the documents. With BOW each word in each document counted as 1, whereas with TF-IDF the words in the documents are counted as their TF-IDF weight. We get the known probabilities for Naive Bayes by adding up the TF-IDF weights instead of simply counting the number of words.
+With **TF-IDF**, we are not directly transforming the probabilities of each word. Instead, we can think about it as transforming the messages (i.e. documents). With BOW each word in each document counted as 1, whereas with TF-IDF the words in the documents are counted as their TF-IDF weight. We get the known probabilities for Naive Bayes by adding up the TF-IDF weights instead of simply counting the number of words. Put simply, the higher the TFIDF score (weight), the rarer the word and vice versa.
 
 ## Poisoning
 A downside of this type of Bayesian filtering in cases of more targeted spam is that spammers will start using words (or whole pieces of text) that will deliberately lower the probablity score. After prolonged training, these words might get associated with spam, which is called *poisoning*. 
