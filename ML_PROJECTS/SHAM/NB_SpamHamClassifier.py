@@ -67,7 +67,12 @@ class SpamHamClassifier(object):
     def __init__(self, df_train_data, method='TF-IDF', ngram=2):
 
         if not isinstance(df_train_data, pd.DataFrame):
-          raise InitlError("Class must be initialized with pd.dataframe object containing training data")
+          raise InitError("Class must be initialized with pd.dataframe object containing training data")
+        
+        if 'message' not in df_train_data.columns:
+          raise InitError("Training data missing required dataframe column: [message]")
+        if 'label' not in df_train_data.columns:
+          raise InitError("Training data missing required dataframe column: [label]")
 
         if method not in FA_METHODS:
           raise InitError("Class must be initialized with unsupported feature-ext-method: [%s]. Must be one of: %s" (method, str(FA_METHODS)))
@@ -278,8 +283,11 @@ class SpamHamClassifier(object):
           raise ModelError("Algorithm is not yet trained")
 
         if not isinstance(df_test_data, pd.DataFrame):
-          raise InitlError("Input test-data must be contined in pd.dataframe object")
-        
+          raise ModelError("Input test-data must be contained in pd.dataframe object")
+       
+        if 'message' not in df_test_data.columns:
+          raise ModelError("Testing data missing required dataframe column: [message]")
+ 
         test_messages = df_test_data['message']
 
         d_test_results = dict()
