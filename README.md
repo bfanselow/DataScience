@@ -17,26 +17,26 @@ Each Machine-Learning project in the **ML_PROJECTS** folder has its own *README*
 
 ---
 ## Basic Data-Science Steps 
-###  Not exactly this linear in practice - typcially more cycle/iterative
  1) Frame the problem: understanding business need. 
  2) Import Raw Data needed
  3) Format conversion/normalization: get all data into standard format for a single process to handle all remaining steps.
- 4) Data Cleaning 
-     * Handling Missing values
-     * Handling Corrupted values
- 5) Exploring/understanding the data
+ 4) Exploring/understanding the data (often with visual charts/graphs)
      * Pattern Detection
      * Distribution analysis 
      * Outlier Detection
- 6) Feature Engineering (preparing data for Machine-Learning algorithms)
-      * Scaling and normalization: adjusting the range and center of data to ease learning and improve the interpretation of our results. 
+     * Identification of missing or corrupted values 
+ 5) Feature Engineering (preparing data for Machine-Learning algorithms)
       * Filling missing values: Real-world datasets often have missing values.
+      * Handling corrupted value.
+      * Scaling and normalization: adjusting the range and center of data to ease learning and improve the interpretation of our results. 
       * Feature selection: removing features because they are unimportant, redundant, or outright counterproductive to learning.
       * Feature coding: choosing a set of symbolic values to represent different categories.
       * Feature extraction: moving from low-level features that are unsuitable for learning (we get poor testing results) to higher-level features which are useful for learning.
- 7) Machine-Learning (predictive) modeling: train and validate models.
+ 6) Machine-Learning - predictive modeling (cyclic iterations over 3 steps).
+      * Train the algorithm to create a ML model
+      * Test the model's performace 
       * Improve model performance with algorithm tuning. 
- 8) Interpreting results: visualizing outcomes to extract meaning.
+ 7) Interpreting results to extract meaning.
 
 ---
 ## Machine-Learning common mathematical terms

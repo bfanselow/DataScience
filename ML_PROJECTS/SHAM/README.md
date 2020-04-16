@@ -27,7 +27,7 @@ We use the **[SMS Spam Collection Data Set](https://www.kaggle.com/uciml/sms-spa
                           ==> select "stopwords"
 ```
 
-###Sample run:
+### spam_ham_scratch.py sample run:
 ```
 (venv) $ ./spam_ham_scratch.py
 spam_ham_scratch.py (1): Loading data from CSV file: ./spam.csv...
