@@ -28,14 +28,16 @@
         Since we are comparing, we can get rid of the denominator and just see which is numerator is bigger.
         * SPAM if: (P(w1|S)*P(S))*(P(w2|S)*P(S))*...*P(wN|S)*P(S) > (P(w1|H)*P(H))*(P(w2|H)*P(H))*...*P(wN|H)*P(H)
         * HAM  if: (P(w1|S)*P(S))*(P(w2|S)*P(S))*...*P(wN|S)*P(S) > (P(w1|H)*P(H))*(P(w2|H)*P(H))*...*P(wN|H)*P(H)
-
        To prevent zero probablity results from words never seen in training we *log-transform* the probabilitie:
         * SPAM if: log( (P(w1|S)*P(S))*(P(w2|S)*P(S))*...*P(wN|S)*P(S) ) > log( (P(w1|H)*P(H))*(P(w2|H)*P(H))*...*P(wN|H)*P(H) )
         * HAM  if: log( (P(w1|S)*P(S))*(P(w2|S)*P(S))*...*P(wN|S)*P(S) ) < log( (P(w1|H)*P(H))*(P(w2|H)*P(H))*...*P(wN|H)*P(H) )
-
        Since log(ab) = log(a) + log(b), our classfication determination becomes:
         * SPAM if: log(P(w1|S)*P(S)) + log((P(w2|S)*P(S))+...+log(P(wN|S)*P(S)) > log(P(w1|H)*P(H)) + log(P(w2|H)*P(H))+...+log(P(wN|H)*P(H))
         * HAM  if: log(P(w1|S)*P(S)) + log((P(w2|S)*P(S))+...+log(P(wN|S)*P(S)) < log(P(w1|H)*P(H)) + log(P(w2|H)*P(H))+...+log(P(wN|H)*P(H))
+       This can be fruther simplified to:
+        * SPAM if: log(P(w1|S)) + log((P(w2|S))+...+log(P(wN|S)) + log(N*P(S)) > log(P(w1|H)) + log(P(w2|H))+...+log(P(wN|H)) + log(N*P(S))
+        * HAM  if: log(P(w1|S)) + log((P(w2|S))+...+log(P(wN|S)) + log(N*P(S)) < log(P(w1|H)) + log(P(w2|H))+...+log(P(wN|H)) + log(N*P(S))
+
 
   -------------------------------------------------------------------------------
   With **TF-IDF**, we are not directly transforming the probabilities of each word. Instead, we can think 
