@@ -27,3 +27,44 @@ We use the **[SMS Spam Collection Data Set](https://www.kaggle.com/uciml/sms-spa
                           ==> select "stopwords"
 ```
 
+###Sample run:
+```
+(venv) $ ./spam_ham_scratch.py
+spam_ham_scratch.py (1): Loading data from CSV file: ./spam.csv...
+spam_ham_scratch.py (1): Cleaning data in raw dataframe object...
+spam_ham_scratch.py (1): Number total messages: 5572. Spam=747, Ham=4825
+spam_ham_scratch.py (1): Number training messages: 4223.  Spam=573, Ham=3650
+spam_ham_scratch.py (1): Number testing messages: 1349.  Spam=174, Ham=1175
+spam_ham_scratch.py (1): Training Naive-Bayes algorithm, feature-extraction method=[BOW]; ngram=2...
+spam_ham_scratch.py (1): BOW NB-algorithm training duration (seconds): 19.89
+spam_ham_scratch.py (1): Testing NB model, feature-extraction method=[BOW]...
+spam_ham_scratch.py (1): BOW NB-model testing duration (seconds): 9.17
+=================================
+BOW METRICS:
+ Total messages tested: 1349
+ TP=104  FP=22  TN=1153  FN=70
+ Accuracy:  0.93
+ Precision:  0.83
+ Recall:  0.6
+ F1-score:  0.69
+Test-Message=[Honey, can you please pick up some dinner on your way home] - Classfication: is-spam=False
+Test-Message=[Congratulations you have a chance to win a car. Free entry] - Classfication: is-spam=True
+=================================
+
+spam_ham_scratch.py (1): Training Naive-Bayes algorithm, feature-extraction method=[TF-IDF]; ngram=2...
+spam_ham_scratch.py (1): TF-IDF NB-algorithm training duration (seconds): 19.88
+spam_ham_scratch.py (1): Testing NB model, feature-extraction method=[TF-IDF]...
+spam_ham_scratch.py (1): TF-IDF NB-model testing duration (seconds): 9.03
+=================================
+TF-IDF METRICS:
+ Total messages tested: 1349
+ TP=125  FP=19  TN=1156  FN=49
+ Accuracy:  0.95
+ Precision:  0.87
+ Recall:  0.72
+ F1-score:  0.79
+Test-Message=[Honey, can you please pick up some dinner on your way home] - Classfication: is-spam=False
+Test-Message=[Congratulations you have a chance to win a car. Free entry] - Classfication: is-spam=True
+=================================
+```
+

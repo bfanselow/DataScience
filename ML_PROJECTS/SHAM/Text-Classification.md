@@ -168,7 +168,7 @@ where *P(w1 ∩ w2 ∩ w3...∩ wN)* indicates the probability of **intersection
 
 If we (naively) assume that the probability of each word is independent of the probability of all other words (which is a rasonable assumption if we already factor in whether the email is spam or not) then we can simplify this to an approximate solution, taking the product of each word-probability expression:
 ```
-P(S|w1 ∩ w2 ∩ ...∩ wN) = P(w1)*P(S) * P(w2)*P(S)*...*P(wN|S)*P(S) / P(w1)*P(w2)*...*P(wN)
+P(S|w1 ∩ w2 ∩ ...∩ wN) = P(w1|S)*P(S) * P(w2|S)*P(S)*...*P(wN|S)*P(S) / P(w1)*P(w2)*...*P(wN)
 ```
 
 If we encounter a word in the testing dataset which is not part of training dataset, P(w) will be 0 which will make the P(S|w) undefined (since we would have to divide by P(w). To address this issue we introduce **additive smoothing**. In additive smoothing we add a number N (typcially 1) to the numerator and add N times number of classes (words) to the denominator.
@@ -184,31 +184,31 @@ Text Classification using **BOW** for Naive-Bayes modeling uses simple word-coun
 ### Summarizing the NBC-BOW Text-Classification process:
 **TRAINING THE ALGORITHM, CREATING THE MODEL**   
 Iterate over the labelled spam/ham messages in the training set. For each word **w** in the set:  
-  1. compute P(w|S): (N-spam-messages-containing-w)+1 / (N-spam-messages)+2
-  2. compute P(w|S): (N-ham-messages-containing-w)+1 / (N-ham-messages)+2 
-  3. Compute P(S) = (N-spam-messsages)/(total-messages)
-  4. Compute P(H) = (N-ham-messages)/(total-messages)
+  1. Compute P(w|S): (N-spam-messages-containing-w)+1 / (N-spam-messages)+2
+  2. Compute P(w|S): (N-ham-messages-containing-w)+1 / (N-ham-messages)+2 
+  3. Compute P(S):   (N-spam-messsages)/(total-messages)
+  4. Compute P(H):   (N-ham-messages)/(total-messages)
 
 **TESTING THE MODEL**   
 Iterate over a set of (unlabelled) test messages. For each message: 
   1. Create a set {w1,...,wN} of the distinct words in the message.
-  2. Compute P(S|w1 ∩ w2 ∩ ...∩ wN) =  P(w1)\*P(S) \* P(w2)\*P(S)\*...\*P(wN|S)\*P(S) / P(w1)\*P(w2)\*...\*P(wN)
-  3. Compute P(H|w1 ∩ w2 ∩...∩ wN) = P(w1)\*P(H) \* P(w2)\*P(H)\*...\*P(wN|H)\*P(H) / P(w1)\*P(w2)\*...\*P(wN)
+  2. Compute P(S|w1 ∩ w2 ∩...∩ wN) = P(w1|S)\*P(S) \* P(w2|S)\*P(S)\*...\*P(wN|S)\*P(S) / P(w1)\*P(w2)\*...\*P(wN)
+  3. Compute P(H|w1 ∩ w2 ∩...∩ wN) = P(w1|H)\*P(H) \* P(w2|H)\*P(H)\*...\*P(wN|H)\*P(H) / P(w1)\*P(w2)\*...\*P(wN)
   4. Classify as SPAM|HAM by comparing 2 and 3.   
      Since we are comparing, we can get rid of the denominator and just see which is numerator is bigger.    
-        * SPAM if: (P(w1)\*P(S))\*(P(w2)\*P(S))\*...\*P(wN|S)\*P(S) > (P(w1)\*P(H))\*(P(w2)\*P(H))\*...\*P(wN|H)\*P(H)
-        * HAM  if: (P(w1)\*P(S))\*(P(w2)\*P(S))\*...\*P(wN|S)\*P(S) < (P(w1)\*P(H))\*(P(w2)\*P(H))\*...\*P(wN|H)\*P(H)
+        * SPAM if: (P(w1|S)\*P(S))\*(P(w2|S)\*P(S))\*...\*P(wN|S)\*P(S) > (P(w1|H)\*P(H))\*(P(w2|H)\*P(H))\*...\*P(wN|H)\*P(H)
+        * HAM  if: (P(w1|S)\*P(S))\*(P(w2|S)\*P(S))\*...\*P(wN|S)\*P(S) < (P(w1|H)\*P(H))\*(P(w2|H)\*P(H))\*...\*P(wN|H)\*P(H)
 
 If one of the words in the testing set was never seen in the training set, this will force the entire probablity to zero. Even if this never occurs, these calculations involve multiplying a lot of small numbers together which can lead to an "underflow" of numerical precision. To address these issues it is common practice to use a *log-transform* of the probabilities, so that our classification becomes:
 ```
-  * SPAM if: log( (P(w1)*P(S))*(P(w2)*P(S))*...*P(wN|S)*P(S) ) > log( (P(w1)*P(H))*(P(w2)*P(H))*...*P(wN|H)*P(H) )
-  * HAM  if: log( (P(w1)*P(S))*(P(w2)*P(S))*...*P(wN|S)*P(S) ) < log( (P(w1)*P(H))*(P(w2)*P(H))*...*P(wN|H)*P(H) )
+  * SPAM if: log( (P(w1|S)*P(S))*(P(w2|S)*P(S))*...*P(wN|S)*P(S) ) > log( (P(w1|H)*P(H))*(P(w2|H)*P(H))*...*P(wN|H)*P(H) )
+  * HAM  if: log( (P(w1|S)*P(S))*(P(w2|S)*P(S))*...*P(wN|S)*P(S) ) < log( (P(w1|H)*P(H))*(P(w2|H)*P(H))*...*P(wN|H)*P(H) )
 ```
 
 Since log(ab) = log(a) + log(b), our classfication determination becomes:
 ```
-  * SPAM if: log(P(w1)*P(S)) + log((P(w2)*P(S)) + ... log(P(wN|S)*P(S)) > log(P(w1)*P(H)) + log(P(w2)*P(H))+...+log(P(wN|H)*P(H))
-  * HAM  if: log(P(w1)*P(S)) + log((P(w2)*P(S)) + ... log(P(wN|S)*P(S)) < log(P(w1)*P(H)) + log(P(w2)*P(H))+...+log(P(wN|H)*P(H))
+  * SPAM if: log(P(w1|S)*P(S)) + log((P(w2|S)*P(S)) + ... log(P(wN|S)*P(S)) > log(P(w1|H)*P(H)) + log(P(w2|H)*P(H))+...+log(P(wN|H)*P(H))
+  * HAM  if: log(P(w1|S)*P(S)) + log((P(w2|S)*P(S)) + ... log(P(wN|S)*P(S)) < log(P(w1|H)*P(H)) + log(P(w2|H)*P(H))+...+log(P(wN|H)*P(H))
 ```
 
 ## Naive-Bayes-Classification (NBC) with TF-IDF: 

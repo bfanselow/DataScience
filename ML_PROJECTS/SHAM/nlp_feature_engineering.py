@@ -22,11 +22,15 @@ from nltk.stem import PorterStemmer
 def message_to_feature_words(message, lower_case=True, stem=True, stop_words=True, ngram=2):
     """
       Take an input text string and translate it to a list of words while
-      perform multiple (optional) NLTK word operations:
+      performing multiple (optional) NLTK word operations:
         * lower-case 
         * n-gram 
         * remove stop-words 
         * word-stemming
+      Required args:
+        * message (str): raw message text
+        * **kwargs: feature-engineering options
+      Return (list): cleaned/processed list of words
     """
     if lower_case:
         message = message.lower()
