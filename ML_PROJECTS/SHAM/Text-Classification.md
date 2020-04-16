@@ -210,6 +210,11 @@ Since log(ab) = log(a) + log(b), our classfication determination becomes:
   * SPAM if: log(P(w1|S)*P(S)) + log((P(w2|S)*P(S)) + ... log(P(wN|S)*P(S)) > log(P(w1|H)*P(H)) + log(P(w2|H)*P(H))+...+log(P(wN|H)*P(H))
   * HAM  if: log(P(w1|S)*P(S)) + log((P(w2|S)*P(S)) + ... log(P(wN|S)*P(S)) < log(P(w1|H)*P(H)) + log(P(w2|H)*P(H))+...+log(P(wN|H)*P(H))
 ```
+Which can be fruther simplified to:
+```
+  * SPAM if: log(P(w1|S)) + log((P(w2|S))+...+log(P(wN|S)) + log(N*P(S)) > log(P(w1|H)) + log(P(w2|H))+...+log(P(wN|H)) + log(N*P(S))
+  * HAM  if: log(P(w1|S)) + log((P(w2|S))+...+log(P(wN|S)) + log(N*P(S)) < log(P(w1|H)) + log(P(w2|H))+...+log(P(wN|H)) + log(N*P(S))
+```
 
 ## Naive-Bayes-Classification (NBC) with TF-IDF: 
 With **TF-IDF**, we are not directly transforming the probabilities of each word. Instead, we can think about it as transforming the documents. With BOW each word in each document counted as 1, whereas with TF-IDF the words in the documents are counted as their TF-IDF weight. We get the known probabilities for Naive Bayes by adding up the TF-IDF weights instead of simply counting the number of words.
