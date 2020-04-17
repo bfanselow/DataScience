@@ -43,7 +43,7 @@ def load_csv_data_to_dataframe(csv_file):
    Required args: path to csv_file
    Return dataframe object
   """
-  dprint(1, "Loading data from CSV file: %s..." % (csv_file))
+  dprint(1, "Loading data from CSV file to dataframe object: %s..." % (csv_file))
 
   if not os.path.exists(csv_file):
     print("%s: ERROR - Data CSV file not found: [%s]" % (myname, csv_file))
@@ -56,16 +56,16 @@ def load_csv_data_to_dataframe(csv_file):
   return( df )
 
 ##-----------------------------------------------------------------------------------
-def clean_dataframe(df):
+def reformat_dataframe(df):
   """
-   Load raw dataframe object and clean the data:
+   Load raw dataframe object and reformat it:
      * remove last 3 columns: ('Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4')
      * rename first two columns: ('v1'=>'labels', 'v2'=>'message')
      * re-map labels (spam=>1, ham=>0) by adding first adding binary-value column and then dropping text-label column
    Required args (pd.DataFrame): raw dataframe object. 
-   Return (pd.DataFrame): cleaned dataframe object.
+   Return (pd.DataFrame): reformatted dataframe object.
   """
-  dprint(1, "Cleaning data in raw dataframe object...")
+  dprint(2, "Reformatting raw dataframe object...")
 
   ## Drop last 3 (unused) cols
   df.drop(['Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4'], axis=1, inplace=True)
@@ -90,7 +90,7 @@ def separate_training_testing_data(df):
         df[mask] will be a dataframe consisting of 75% of the df rows chosen at random 
         df[~mask] will be a dataframe consisting of the other df rows 
 
-   Required args (pd.DataFrame): cleaned dataframe of labeled samples
+   Required args (pd.DataFrame): Re-formatted dataframe of labeled samples
    Returns (dict): "train" and "test" dataframes
   """
 
@@ -246,12 +246,11 @@ if __name__ == '__main__':
     MODE = 'explore' 
 
   ## Load data 
-  dprint(2, "Loading data...")
   df_messages = load_csv_data_to_dataframe(csv_file) 
   ##print( df_messages.head() )
 
   ## Clean data
-  df_messages = clean_dataframe(df_messages) 
+  df_messages = reformat_dataframe(df_messages) 
   #print( df_messages.head() )
   
   total_msgs = len(df_messages) ## i.e. df_messages.shape[0]
