@@ -27,14 +27,13 @@ We use the **[SMS Spam Collection Data Set](https://www.kaggle.com/uciml/sms-spa
                           ==> select "stopwords"
 ```
 ---
-### Usage (spam_ham_scratch.py)
+## spam_ham_scratch.py
+### Usage
 ```
 (venv) $ ./spam_ham_scratch.py <csv-file-path> [options]
-
  OPTIONS:
    --explore        (explore the spam|ham dataset)
    -d <debug-level> (change default debug level for additional processing messages)
- 
 ```
 ### Model performance tuning
 Try tweaking pre-processing and feature-engineering parameters in the **nlp_feature_engineering.py** module and restesting model performace. For example, it was found that using n-grams resulted (not surprsingly) in much better performance. However, removing stopwords BEFORE n-gram compilation resulted in **lower** performance!
@@ -185,7 +184,8 @@ TOP-20 Ham-words (after stopword removal)
 20      home    110
 ```
 ---
-### Usage (spam_ham_skl.py)
+## spam_ham_skl.py
+### Usage
 ```
 (venv) $ ./spam_ham_skl.py <csv-file-path> [options]
  OPTIONS:
