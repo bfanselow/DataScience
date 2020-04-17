@@ -26,10 +26,21 @@ We use the **[SMS Spam Collection Data Set](https://www.kaggle.com/uciml/sms-spa
                           ==> select "punkt"
                           ==> select "stopwords"
 ```
-
-### spam_ham_scratch.py sample run:
+---
+### Usage
 ```
-(venv) $ ./spam_ham_scratch.py
+(venv) $ ./spam_ham_scratch.py <csv-file-path> [options]
+
+ OPTIONS:
+   --explore        (explore the spam|ham dataset)
+   -d <debug-level> (change default debug level for additional processing messages)
+ 
+```
+
+---
+### Example training/testing run:
+```
+(venv) $ ./spam_ham_scratch.py ./spam.csv
 spam_ham_scratch.py (1): Loading data from CSV file: ./spam.csv...
 spam_ham_scratch.py (1): Cleaning data in raw dataframe object...
 spam_ham_scratch.py (1): Number total messages: 5572. Spam=747, Ham=4825
@@ -68,3 +79,59 @@ Test-Message=[Congratulations you have a chance to win a car. Free entry] - Clas
 =================================
 ```
 
+---
+### Example data-exploration run 
+```
+(venv) $ ./spam_ham_scratch.py ./spam.csv --explore
+spam_ham_scratch.py (1): Loading data from CSV file: ./spam.csv...
+spam_ham_scratch.py (1): Cleaning data in raw dataframe object...
+spam_ham_scratch.py (1): Number total messages: 5572. Spam=747, Ham=4825
+spam_ham_scratch.py (1): Number training messages: 4155.  Spam=556, Ham=3599
+spam_ham_scratch.py (1): Number testing messages: 1417.  Spam=191, Ham=1226
+
+TOP-20 Spam-words
+   Spam-words  count
+1        call    342
+2        your    263
+3         you    252
+4         the    204
+5         for    201
+6        free    180
+7         txt    136
+8        have    135
+9        from    127
+10        and    122
+11       text    112
+12     mobile    109
+13       with    108
+14      claim    106
+15      reply    101
+16        now     93
+17       stop     89
+18       this     86
+19        our     85
+20        get     82
+
+TOP-20 Ham-words
+   Ham-words  count
+1        you   1665
+2        the   1113
+3        and    845
+4        for    496
+5       that    442
+6       have    433
+7       your    413
+8        but    413
+9        are    405
+10       not    381
+11       can    356
+12      will    331
+13       get    293
+14      just    286
+15      when    270
+16      with    269
+17       how    245
+18      what    235
+19       all    231
+20       got    227
+```
