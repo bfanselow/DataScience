@@ -9,11 +9,14 @@
    status for the different train/test runs. Finally, use the model to classify
    a couple test messages
 
-"""
 
+"""
+from collections import Counter
 import pandas as pd
 import numpy as np
 import time
+import argparse
+import sys 
 import os
 
 from NB_SpamHamClassifier import SpamHamClassifier
@@ -39,10 +42,15 @@ def load_csv_data_to_dataframe(csv_file):
    Load data from passed csv file into pd dataframe.
    Required args: path to csv_file
    Return dataframe object
-
-   TODO: check for file existence and handle errors 
   """
   dprint(1, "Loading data from CSV file: %s..." % (csv_file))
+
+  if not os.path.exists(csv_file):
+    print("%s: ERROR - Data CSV file not found: [%s]" % (myname, csv_file))
+    sys.exit(1)
+  if not os.access(csv_file, os.R_OK):
+    print("%s: ERROR - Data CSV file cound not be read: [%s]" % (myname, csv_file))
+    sys.exit(1)
   df = pd.read_csv(csv_file, encoding='latin-1')
 
   return( df )
@@ -141,28 +149,120 @@ def train_test_evaluate(method, df_train_data, df_test_data):
   return( (SHC,d_metrics) )
 
 ##-----------------------------------------------------------------------------------
+def explore_data(df_messages):
+  """ 
+   Show the TOP-<N> most common spam and ham words from all messages.
+   TODO: coordinate with the same logic used by training/testing code with respect to
+         which words are filtered, etc. 
+  """ 
+
+  top_N = 20
+  min_word_length = 3
+
+  ## Get pd.Series for each message type (spam|ham)
+  sr_ham_messages = df_messages[df_messages.label==0]["message"]
+  sr_spam_messages = df_messages[df_messages.label==1]["message"]
+
+  d_categories = {
+    'Spam': sr_spam_messages,
+    'Ham': sr_ham_messages
+  }
+
+  for cat,pd_sr in d_categories.items():
+    column_head = cat + '-words'
+    all_words = [] 
+    for message in pd_sr:
+      words = message.lower().split()
+      all_words += words 
+
+    d_words = Counter(all_words)
+    l_keys = d_words.keys()
+    l_remove = [] 
+    for k in l_keys:
+      if k.isalpha() == False:
+        l_remove.append(k) 
+      elif len(k) < min_word_length:
+        l_remove.append(k) 
+
+    # pop() + list comprehension to remove multiple keys from the dictionary 
+    [d_words.pop(key) for key in l_remove] 
+
+    d_words = d_words.most_common(top_N) 
+    df = pd.DataFrame.from_dict(d_words)
+    df = df.rename(columns={0: column_head, 1 : "count"})
+    print("\nTOP-%d %s" % (top_N, column_head))
+    df.index = np.arange(1, len(df) + 1) ## re-index with 1 as start
+    print(df)
+
+##-----------------------------------------------------------------------------------
+def parse_args():
+  """ Parse input args are return argparse.parser """
+  parser = argparse.ArgumentParser( prog=myname, 
+                                    usage='%(prog)s <csv-file-path> [options]',
+                                    description='Deomnstrate a homegrown NBC spam filter'
+                                  )
+  parser.add_argument(
+                        'Path',
+                        metavar='path',
+                        type=str,
+                        help='Path to CSV file'
+                     )
+  parser.add_argument(
+                        '-d', '--debug',                 
+                        required=False,
+                        metavar='debug',
+                        type=int,
+                        help='Set debug level'
+                     )
+  parser.add_argument(
+                        '-e', '--explore',
+                        action='store_true',
+                        required=False,
+                        help='Explore the dataset'
+                      )
+  pargs = parser.parse_args()
+
+  return(pargs)
+
+##-----------------------------------------------------------------------------------
 if __name__ == '__main__':
 
-  csv_file = './spam.csv'
+  CSV_FILE = None
+  MODE = 'model' 
+    
+  l_test_messages = [  
+      'Honey, can you please pick up some dinner on your way home',  ## HAM
+      'Congratulations you have a chance to win a car. Free entry'   ## SPAM
+  ]
  
+  pargs = parse_args() 
+  dprint(2, "INPUT-ARGS: %s" % (vars(pargs)))
+
+  csv_file = pargs.Path
+
+  if pargs.debug:
+    DEBUG = pargs.debug
+  if pargs.explore:
+    MODE = 'explore' 
+
   ## Load data 
   dprint(2, "Loading data...")
-  df_mails = load_csv_data_to_dataframe(csv_file) 
-  ##print( df_mails.head() )
+  df_messages = load_csv_data_to_dataframe(csv_file) 
+  ##print( df_messages.head() )
 
   ## Clean data
-  df_mails = clean_dataframe(df_mails) 
-  #print( df_mails.head() )
+  df_messages = clean_dataframe(df_messages) 
+  #print( df_messages.head() )
   
-  total_msgs = len(df_mails) ## i.e. df_mails.shape[0]
-  total_spam = df_mails[df_mails.label == 1].shape[0]
-  total_ham = df_mails[df_mails.label == 0].shape[0]
+  total_msgs = len(df_messages) ## i.e. df_messages.shape[0]
+  total_spam = df_messages[df_messages.label == 1].shape[0]
+  total_ham = df_messages[df_messages.label == 0].shape[0]
   dprint(1, "Number total messages: %d. Spam=%d, Ham=%d" % (total_msgs, total_spam, total_ham))
 
-  #print(df_mails['label'].value_counts())
+  #print(df_messages['label'].value_counts())
 
   ## Separate messages into "training" and "testing" sets
-  d_separated = separate_training_testing_data(df_mails)
+  d_separated = separate_training_testing_data(df_messages)
 
   ## Pandas dataframes
   df_train = d_separated['train']
@@ -175,24 +275,23 @@ if __name__ == '__main__':
   N_spam_test = df_test[df_test.label == 1].shape[0]
   N_ham_test = df_test[df_test.label == 0].shape[0]
   dprint(1, "Number testing messages: %d.  Spam=%d, Ham=%d" % (len(df_test), N_spam_test, N_ham_test ))
+  
+  if MODE == 'explore': ## explore the data in various ways
+    explore_data(df_messages) 
 
-  l_test_messages = [  
-    'Honey, can you please pick up some dinner on your way home',  ## HAM
-    'Congratulations you have a chance to win a car. Free entry'   ## SPAM
-  ]
-
-  for fa_method in [ 'BOW', 'TF-IDF']:
-    model, d_metrics = train_test_evaluate(fa_method, df_train, df_test)
-    print("\n=================================")
-    print("%s METRICS:" % (fa_method))
-    print(" Total messages tested: %d" %  (d_metrics['total']))
-    print(" TP=%d  FP=%d  TN=%d  FN=%d" %  (d_metrics['TP'], d_metrics['FP'],d_metrics['TN'],d_metrics['FN']))
-    print(" Accuracy: ",  round(d_metrics['accuracy'],2))
-    print(" Precision: ", round(d_metrics['precision'],2))
-    print(" Recall: ",  round(d_metrics['recall'],2))
-    print(" F1-score: ",  round(d_metrics['f1score'],2))
+  else: ## MODE = 'model' - train algorthm, test the model and show performance metrics
+    for fa_method in [ 'BOW', 'TF-IDF']:
+      model, d_metrics = train_test_evaluate(fa_method, df_train, df_test)
+      print("\n=================================")
+      print("%s METRICS:" % (fa_method))
+      print(" Total messages tested: %d" %  (d_metrics['total']))
+      print(" TP=%d  FP=%d  TN=%d  FN=%d" %  (d_metrics['TP'], d_metrics['FP'],d_metrics['TN'],d_metrics['FN']))
+      print(" Accuracy: ",  round(d_metrics['accuracy'],2))
+      print(" Precision: ", round(d_metrics['precision'],2))
+      print(" Recall: ",  round(d_metrics['recall'],2))
+      print(" F1-score: ",  round(d_metrics['f1score'],2))
  
-    for msg in l_test_messages: 
-      result = model.classify_message(msg)
-      print("Test-Message=[%s] - Classfication: is-spam=%s" % (msg, result))
-    print("\n=================================\n")
+      for msg in l_test_messages: 
+        result = model.classify_message(msg)
+        print("Test-Message=[%s] - Classfication: is-spam=%s" % (msg, result))
+      print("\n=================================\n")
