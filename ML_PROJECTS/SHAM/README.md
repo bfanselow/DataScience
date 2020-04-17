@@ -27,7 +27,7 @@ We use the **[SMS Spam Collection Data Set](https://www.kaggle.com/uciml/sms-spa
                           ==> select "stopwords"
 ```
 ---
-### Usage
+### Usage (spam_ham_scratch.py)
 ```
 (venv) $ ./spam_ham_scratch.py <csv-file-path> [options]
 
@@ -36,7 +36,7 @@ We use the **[SMS Spam Collection Data Set](https://www.kaggle.com/uciml/sms-spa
    -d <debug-level> (change default debug level for additional processing messages)
  
 ```
-### Model performace tuning
+### Model performance tuning
 Try tweaking pre-processing and feature-engineering parameters in the **nlp_feature_engineering.py** module and restesting model performace. For example, it was found that using n-grams resulted (not surprsingly) in much better performance. However, removing stopwords BEFORE n-gram compilation resulted in **lower** performance!
 
 ---
@@ -184,3 +184,16 @@ TOP-20 Ham-words (after stopword removal)
 19      tell    119
 20      home    110
 ```
+---
+### Usage (spam_ham_skl.py)
+```
+(venv) $ ./spam_ham_skl.py <csv-file-path> [options]
+ OPTIONS:
+   -d <debug-level> (change default debug level for additional processing messages)
+```
+### Results 
+The best model performance came from a Support-Vector-Machine model with a particular regularization parameter (C) select automatically by the script. 
+ * Accuracy: 98.3%
+ * Precision: 100% (all non-spam message correctly classified) 
+ * Recall: 87.7% (correctly classified spam messages)
+
