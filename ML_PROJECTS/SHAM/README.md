@@ -135,3 +135,50 @@ TOP-20 Ham-words
 19       all    231
 20       got    227
 ```
+---
+```
+TOP-20 Spam-words (after stopword removal)
+   Spam-words  count
+1        call    342
+2        free    180
+3         txt    136
+4        text    112
+5      mobile    109
+6       claim    106
+7       reply    101
+8        stop     89
+9         get     82
+10        new     69
+11       send     65
+12      nokia     64
+13        win     58
+14      prize     58
+15       cash     56
+16    contact     56
+17     please     52
+18    service     48
+19        per     44
+20       tone     40
+TOP-20 Ham-words (after stopword removal)
+   Ham-words  count
+1        get    293
+2        got    227
+3       like    221
+4       call    215
+5       come    215
+6       know    208
+7       good    187
+8      going    157
+9       want    153
+10      time    153
+11      love    149
+12      need    147
+13     still    144
+14       one    141
+15       see    126
+16     think    124
+17      dont    124
+18      send    121
+19      tell    119
+20      home    110
+```
