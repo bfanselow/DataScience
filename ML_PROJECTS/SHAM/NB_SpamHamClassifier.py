@@ -64,7 +64,7 @@ class ModelError(Exception):
 ##-------------------------------------------------------------------------------------
 class SpamHamClassifier(object):
 
-    def __init__(self, df_train_data, method='TF-IDF', ngram=2):
+    def __init__(self, df_train_data, method='TF-IDF'):
 
         if not isinstance(df_train_data, pd.DataFrame):
           raise InitError("Class must be initialized with pd.dataframe object containing training data")
@@ -82,7 +82,6 @@ class SpamHamClassifier(object):
        
         self.TRAINED = 0 
         self.method = method 
-        self.ngram = ngram 
 
         ## message counts
         self.spam_messages = self.labels.value_counts()[1]
@@ -143,7 +142,7 @@ class SpamHamClassifier(object):
         """
 
         for i in range(self.total_messages):
-          word_list = nlp_feature_engineering.message_to_feature_words(self.messages[i], ngram=self.ngram)
+          word_list = nlp_feature_engineering.message_to_feature_words(self.messages[i])
           count = list() # keep track of whether the word has ocured in the message or not.
        
           for word in word_list:
@@ -230,7 +229,7 @@ class SpamHamClassifier(object):
         if not self.TRAINED:
           raise ModelError("Algorithm is not yet trained")
  
-        word_list = nlp_feature_engineering.message_to_feature_words(message, ngram=self.ngram)
+        word_list = nlp_feature_engineering.message_to_feature_words(message)
 
         p_spam = 0
         p_ham = 0

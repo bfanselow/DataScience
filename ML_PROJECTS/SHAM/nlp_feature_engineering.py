@@ -3,7 +3,12 @@
   File: nlp_feature_engineering.py
 
   Description:
-    Methods for NLP feature-engineering
+    Methods for NLP feature-engineering.
+    These methods provide several options for tuning our model (ngrams, stopwords, etc.).
+    Try tweaking some of these parameters and re-testing model performance
+  
+    For example, it was found that removing stopwords BEFORE n-gram compilation resulted
+    in much lower performace!
 
   Requires:
     * pip install nltk
@@ -41,6 +46,8 @@ def message_to_feature_words(message, lower_case=True, stem=True, stop_words=Tru
    
     ## Keep only if > 2 chars
     words = [w for w in words if len(w) > 2]
+   
+    ## removing stopwords BEFORE n-gram compile results in much lower performace!
 
     ## if N-gram, compile n-grams and return list
     if ngram > 1:

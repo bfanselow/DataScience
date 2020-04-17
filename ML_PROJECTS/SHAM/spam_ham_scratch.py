@@ -9,6 +9,8 @@
    status for the different train/test runs. Finally, use the model to classify
    a couple test messages
 
+   Several model paramaters can be tweaked in "nlp_feature_engineering" methods.
+   Experiment with these parameters to improve model performace. 
 
 """
 from collections import Counter
@@ -20,13 +22,13 @@ import sys
 import os
 
 from NB_SpamHamClassifier import SpamHamClassifier
+import nlp_feature_engineering
 import metrics
+from nltk.corpus import stopwords
 
 myname = os.path.basename(__file__)
 
-DEBUG = 1 
-
-NGRAM = 2 ## N-grams: experiment with changing this from 1-2-3
+DEBUG = 0 
 
 ##-----------------------------------------------------------------------------------
 def dprint(level, msg):
@@ -125,10 +127,10 @@ def train_test_evaluate(method, df_train_data, df_test_data):
    Return (tuple): SpamHamClassifier Model and dict of test metrics
  
   """
-  SHC = SpamHamClassifier(df_train_data, method, NGRAM)
+  SHC = SpamHamClassifier(df_train_data, method)
 
   ## training
-  dprint(1, "Training Naive-Bayes algorithm, feature-extraction method=[%s]; ngram=%s..." % (method, NGRAM))
+  dprint(1, "Training Naive-Bayes algorithm, feature-extraction method=[%s]..." % (method))
   t_start = time.perf_counter()
   SHC.create_model()
   t_end = time.perf_counter()
@@ -156,6 +158,7 @@ def explore_data(df_messages):
          which words are filtered, etc. 
   """ 
 
+  RM_STOPWORDS = 1 ## remove stopwords first
   top_N = 20
   min_word_length = 3
 
@@ -167,13 +170,20 @@ def explore_data(df_messages):
     'Spam': sr_spam_messages,
     'Ham': sr_ham_messages
   }
+  sw = stopwords.words('english')
 
   for cat,pd_sr in d_categories.items():
     column_head = cat + '-words'
+    title = "TOP-%d %s" % (top_N, column_head)
     all_words = [] 
     for message in pd_sr:
       words = message.lower().split()
       all_words += words 
+    
+    ## remove STOP-WORDS if specified
+    if RM_STOPWORDS:
+      title += " (after stopword removal)"
+      all_words = [word for word in all_words if word not in sw]
 
     d_words = Counter(all_words)
     l_keys = d_words.keys()
@@ -183,14 +193,14 @@ def explore_data(df_messages):
         l_remove.append(k) 
       elif len(k) < min_word_length:
         l_remove.append(k) 
-
-    # pop() + list comprehension to remove multiple keys from the dictionary 
+    
+    ## pop() + list comprehension to remove multiple keys from the dictionary 
     [d_words.pop(key) for key in l_remove] 
 
     d_words = d_words.most_common(top_N) 
     df = pd.DataFrame.from_dict(d_words)
     df = df.rename(columns={0: column_head, 1 : "count"})
-    print("\nTOP-%d %s" % (top_N, column_head))
+    print(title)
     df.index = np.arange(1, len(df) + 1) ## re-index with 1 as start
     print(df)
 
