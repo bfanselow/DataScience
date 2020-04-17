@@ -36,6 +36,8 @@ We use the **[SMS Spam Collection Data Set](https://www.kaggle.com/uciml/sms-spa
    -d <debug-level> (change default debug level for additional processing messages)
  
 ```
+### Model performace tuning
+Try tweaking pre-processing and feature-engineering parameters in the **nlp_feature_engineering.py** model and restesting model performace. For example, it was found that using n-grams resulted (not surprsingly) in much better performance. However, removing stopwords BEFORE n-gram compilation resulted in **lower** performance!
 
 ---
 ### Example training/testing run:
