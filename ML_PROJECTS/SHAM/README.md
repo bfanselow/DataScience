@@ -192,7 +192,7 @@ TOP-20 Ham-words (after stopword removal)
    -d <debug-level> (change default debug level for additional processing messages)
 ```
 ### Results 
-The best model performance came from a Support-Vector-Machine model with a particular regularization parameter (C) select automatically by the script. 
+The best model performance came from a Support-Vector-Machine model with a particular regularization parameter (C) selected automatically by the script. 
  * Accuracy: 98.3%
  * Precision: 100% (all non-spam message correctly classified) 
  * Recall: 87.7% (correctly classified spam messages)
