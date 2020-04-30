@@ -5,6 +5,16 @@
 <img src="https://github.com/bfanselow/DataScience/blob/master/img/data_science_venn.jpg" width="424" height="238">
 
 Venn Diagram Source: [Drew Conway](http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram)
+---
+
+###Data science is a process that uses names and numbers to answer such questions, typically one of five types:
+
+* How much or how many? (regression)
+* Which category? (classification)
+* Which group? (clustering)
+* Is this weird? (anomaly detection)
+* Which option should be taken? (recommendation)
+
 
 ---
 
