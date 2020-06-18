@@ -15,6 +15,19 @@ Venn Diagram Source: [Drew Conway](http://drewconway.com/zia/2013/3/26/the-data-
 * Is this weird? (anomaly detection)
 * Which option should be taken? (recommendation)
 
+### Supervised vs. Un-Supervised Learning
+#### Supervised
+Supervised (or Trained) machine learning is basically the process of building a model that is capable of making predictions after being trained by repetition. Learning requires large amounts of tagged/labeled input data known as "training data".  The machine" learns from the labeled input.  Once trained, the machine can make either (*classification* or *regression*) predictions on a new data set. With *classification* the machine predicts discrete responses (a *label*), such as spam vs. ham email. With *regression* the machine predicts continuous responses (a *value*).  The more input data the machine can learn from (i.e. more training!), the better it will be able to predict correct responses.
+
+Supervised learning typically involves simpler algorithms and can provide very definitive results. However, it has two major drawbacks:
+  1) Lots of labeled data is required for a well trained model - what if you don't have labeled data? What if the data is associated with an entirely novel situation?
+  2) Even if you do have a large set of labelled data, the quality of the model's output is only as good as the quality of the input data - how do you know that the input data is accurately labeled?  
+```
+  Garbage-in --> Model --> Garbage-out
+```
+
+### Unsupervised
+Unsupervised machine learning is used to discover patterns or density distributions in un-labeled input data - typically for the purpose of identifying clusters and associations in the data. The more input data the machine can process, the more useful the results will be.
 
 ---
 
@@ -29,19 +42,19 @@ Each Machine-Learning project in the **ML_PROJECTS** folder has its own *README*
 ## Basic Data-Science Steps 
  1) Frame the problem: understanding business need. 
  2) Import Raw Data needed
- 3) Format conversion/normalization: get all data into standard format for a single process to handle all remaining steps.
- 4) Exploring/understanding the data (often with visual charts/graphs)
+ 3) Exploring/understanding the data (often with visual charts/graphs)
      * Pattern Detection
      * Distribution analysis 
      * Outlier Detection
      * Identification of missing or corrupted values 
+ 4) Data pre-processing: get all data into standard format for a single process to handle all remaining steps.
+       * Filling missing values (real-world datasets usually have missing values).
+       * Handling corrupted values.
  5) Feature Engineering (preparing data for Machine-Learning algorithms)
-      * Filling missing values: Real-world datasets often have missing values.
-      * Handling corrupted value.
-      * Scaling and normalization: adjusting the range and center of data to ease learning and improve the interpretation of our results. 
       * Feature selection: removing features because they are unimportant, redundant, or outright counterproductive to learning.
       * Feature coding: choosing a set of symbolic values to represent different categories.
       * Feature extraction: moving from low-level features that are unsuitable for learning (we get poor testing results) to higher-level features which are useful for learning.
+      * Scaling and normalization: adjusting the range and center of data to ease learning and improve the interpretation of our results. 
  6) Machine-Learning - predictive modeling (cyclic iterations over 3 steps).
       * Train the algorithm to create a ML model
       * Test the model's performace 
