@@ -18,7 +18,7 @@ Venn Diagram Source: [Drew Conway](http://drewconway.com/zia/2013/3/26/the-data-
 ### Machine Learning problems can be categorized into three major types:
 
 #### Supervised
-Supervised (or Trained) machine learning is the process of building a model that is capable of making predictions after being trained by repetition. Learning requires large amounts of tagged/labeled input data known as "training data".  The machine" learns from the labeled input.  Once trained, the machine can make either (*classification* or *regression*) predictions on a new data set. With *classification* the machine predicts discrete responses (a *label*), such as spam vs. ham email. With *regression* the machine predicts continuous responses (a *value*).  The more input data the machine can learn from (i.e. more training!), the better it will be able to predict correct responses.
+Supervised (or Trained) machine learning is the process of building a model that is capable of making predictions after being trained by repetition. Learning requires large amounts of tagged/labeled input data known as "training data".  The model learns from the labeled input.  Once trained, the model can make either (*classification* or *regression*) predictions on a new data set. With *classification* the model predicts discrete responses (a *label*), such as spam vs. ham email. With *regression* the machine predicts continuous responses (a *value*).  The more input data the model can learn from (i.e. more training!), the better it will be able to predict correct responses.
 
 Supervised learning typically involves simpler algorithms and can provide very definitive results. However, it has two major drawbacks:
   1) Lots of labeled data is required for a well trained model - what if you don't have labeled data? What if the data is associated with an entirely novel situation?
@@ -31,11 +31,11 @@ Supervised learning typically involves simpler algorithms and can provide very d
 Unsupervised learning, by contrast, does not have *labelled* input data.  Without prior knowledge of data patterns, the model **discovers** patterns or density distributions in un-labeled inputdata - typically for the purpose of identifying clusters and associations in the data. As with supervised-learning, the more input data the machine can process, the more accurate and useful the results will be.
 
 ### Reinforcement Learning
-Reinforcement learning is used to train the machine to make a sequence of decisions, learning to achieve a goal in a complex, uncertain environment using a feedback mechanism based on previous choices.  The machine gets rewarded or penalties for the actions it performs. Its goal is to maximize the total reward. Without any prior training, it’s up to the model to figure out how to maximize the reward, starting from totally random trials and and gradually making more and more sophisticated decisions.
+Reinforcement learning is used to train the model to make a sequence of decisions, learning to achieve a goal in a complex, uncertain environment using a feedback mechanism based on previous choices.  The model gets rewarded or penalties for the actions it performs. Its goal is to maximize the total reward. Without any prior training, it’s up to the model to figure out how to maximize the reward, beginning with totally random trials and gradually making more and more sophisticated decisions.
 
 
 **NOTE:**  
-There are other learning types - hybrids of these and variations (inverse-reinforcement), but these are the big three. 
+There are other problem types - hybrids of these, and variations (i.e. inverse-reinforcement), but these are the big three. 
 
 ---
 
