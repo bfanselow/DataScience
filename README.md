@@ -28,7 +28,7 @@ Supervised learning typically involves simpler algorithms and can provide very d
 ```
 
 ### Unsupervised
-Unsupervised learning, by contrast, does not have *labelled* input data.  Without prior knowledge of data patterns, the model **discovers** patterns or density distributions in un-labeled inputdata - typically for the purpose of identifying clusters and associations in the data. As with supervised-learning, the more input data the machine can process, the more accurate and useful the results will be.
+Unsupervised learning, by contrast, does not have *labelled* input data.  Without prior knowledge of data patterns, the model **discovers** patterns or density distributions in un-labeled input data - typically for the purpose of identifying clusters and associations in the data. As with supervised-learning, the more input data the machine can process, the more accurate and useful the results will be.
 
 ### Reinforcement Learning
 Reinforcement learning is used to train the model to make a sequence of decisions, learning to achieve a goal in a complex, uncertain environment using a feedback mechanism based on previous choices.  The model gets rewarded or penalties for the actions it performs. Its goal is to maximize the total reward. Without any prior training, it’s up to the model to figure out how to maximize the reward, beginning with totally random trials and gradually making more and more sophisticated decisions.
