@@ -20,12 +20,13 @@ Venn Diagram Source: [Drew Conway](http://drewconway.com/zia/2013/3/26/the-data-
 #### Supervised
 Supervised machine learning is the process of building a model that is capable of making predictions after being trained by repetition. Learning requires large amounts of tagged/labeled input data known as "training data".  The model learns from the labeled input.  Once trained, the model can make either (*classification* or *regression*) predictions on a new data set. With *classification* the model predicts discrete responses (a *label*), such as spam vs. ham email. With *regression* the machine predicts continuous responses (a *value*).  The more input data the model can learn from (i.e. more training!), the better it will be able to predict correct responses.
 
-Supervised learning typically involves simpler algorithms and can provide very definitive results. However, it has two major drawbacks:
+Supervised learning typically involves simpler algorithms and can provide very definitive results. However, it has some major drawbacks:
   1) Lots of labeled data is required for a well trained model - what if you don't have labeled data? What if the data is associated with an entirely novel situation?
   2) Even if you do have a large set of labelled data, the quality of the model's output is only as good as the quality of the input data - how do you know that the input data is accurately labeled?  
 ```
   Garbage-in --> Model --> Garbage-out
 ```
+  3) Finally, even if the input data is considered to be very accurately labelled, the output is going to suffer biases based on this input.  In certain scenarios, this bias will not be easily detected and can have negative results.  (TODO: give an example).
 
 ### Unsupervised
 Unsupervised learning, by contrast, does not have *labelled* input data.  Without prior knowledge of data patterns, the model **discovers** patterns or density distributions in un-labeled input data - typically for the purpose of identifying clusters and associations in the data. As with supervised-learning, the more input data the machine can process, the more accurate and useful the results will be.
