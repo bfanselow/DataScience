@@ -57,7 +57,7 @@ Machine learning uses **"feature vectors"** which can be thought of as a specifi
 Typcially, one of the very first steps in making a machine learning model is "vectorizing" the data. Under the hood, machine-le
 arning algorithms perform mathematical computations on vectors and collections-of-vectors (a.k.a. **matrix**).
 
-**Machine Leanring computational terms:**
+**Machine Learning computational terms:**
  * **Scalar**: A single number.
  * **Vector** : A list of values (tensor of rank 1).
  * **Matrix**: A two dimensional list of values (tensor or rank 2).
